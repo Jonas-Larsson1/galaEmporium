@@ -1,7 +1,7 @@
-import about from "./api/about.js";
-import contact from "./api/contact.js";
+import club from "./api/club.js";
+import login from "./api/login.js";
 
 export default function (server) {
-  about(server)
-  contact(server)
+  club(server)
+  login(server)
 }
