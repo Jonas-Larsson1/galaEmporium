@@ -3,12 +3,12 @@ import mongoose from "mongoose"
 import apiRegister from "./api-register.js"
 
 const server = express()
-const port = 80
+const port = 3000
 
 server.use(express.json())
 server.use(express.static('../client'))
 
-mongoose.connect("mongodb+srv://linus:qwerty123456@cluster0.ng8b2fk.mongodb.net/spa")
+mongoose.connect("mongodb+srv://jonas1:Bc1q24H5dHUWSfPj@myfirstcluster.kltqcx2.mongodb.net/galaEmporium")
 
 apiRegister(server)
 
