@@ -1,6 +1,7 @@
 import express from "express"
 import mongoose from "mongoose"
 import apiRegister from "./api-register.js"
+import session from "express-session"
 
 const server = express()
 const port = 3000
