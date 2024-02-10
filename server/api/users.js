@@ -45,6 +45,16 @@ export default function user(server) {
         return res.status(400).json({
           message: "Invalid email format"
         })
+      } 
+      
+      const existingUser = userModel.findOne({
+        email: req.body.email
+      })
+
+      if (existingUser) {
+        return res.status(409).json({
+          message: "Email already in use"
+        })
       }
 
       const newUser = new userModel({
