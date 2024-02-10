@@ -11,6 +11,11 @@ const getHash = (password) => {
 }
 // ---------------------------------
 
+const isValidEmail = (email) => {
+  const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  return emailRegex.test(email)
+}
+
 // borde alla schemas ligga i egna filer i en 'models' mapp?
 const userSchema = mongoose.Schema({
   name: String,
@@ -33,6 +38,12 @@ export default function user(server) {
       if (!req.body.name || !req.body.email || !req.body.password) {
         return res.status(400).json({
           message: "Missing required fields"
+        })
+      }
+
+      if (!isValidEmail(req.body.email)) {
+        return res.status(400).json({
+          message: "Invalid email format"
         })
       }
 
