@@ -48,7 +48,6 @@ export default function user(server) {
         password_hash: getHash(req.body.password)
       })
       
-      console.log(user)
       if (user) {
         req.session.user = user._id
         res.status(201).json({
@@ -59,6 +58,18 @@ export default function user(server) {
           message: "Invalid email or password"
         })
       }
+    }
+  })
+
+  server.delete('/api/login', async(req, res) => {
+    if (req.session.user) {
+      res.status(200).json({
+        message: "Succesfully logged out"
+      })
+    } else {
+      res.status(404).json({
+        message: "There is no user logged in"
+      })
     }
   })
 
