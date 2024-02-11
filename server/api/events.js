@@ -15,13 +15,19 @@ const eventModel = mongoose.model('events', eventSchema)
 export default function event(server) {
 
   server.get('/api/event', async (req, res) => {
-    res.json(await eventModel.find().populate("club_id"))
+    res.json(await eventModel.find())
   })
 
   server.post('/api/event', async (req, res)=> {
     try{
-    const newEvent = new eventModel(req.body)
-    const result = newEvent.save()
+    const newEvent = new eventModel({
+      name: req.body.name,
+      description: req.body.description,
+      date: req.body.date,
+      max_attendees: req.body.max_attendees,
+      club_id: req.body.club_id,
+      downloadURL: req.body.downloadURL})
+    const result = await newEvent.save()
     res.json(result)
     } catch(error){
         res.json({message: "404: Could not post event", error})
