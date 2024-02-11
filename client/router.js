@@ -2,6 +2,7 @@ import home from "./pages/home.js";
 import club from "./pages/club.js";
 import login from "./pages/login.js";
 
+
 async function route() {
   //console.log(location)
 

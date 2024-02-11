@@ -1,8 +1,38 @@
 body {
   background-color: darkslategrey;
   font-family: Ephesis;
+  width: 100%;
+
 }
 
 header {
   background-color: azure;
+  display: flex;
+  justify-content: space-around;
+}
+
+nav {
+  height: 10vh;
+  width: 85%;
+  background-color: aqua;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem 0 2rem;
+}
+
+.nav__container{
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#login-btn{
+  width: 4rem;
+  height: 2rem;
+}
+
+.cart-shopping{
+  font-size: 25px;
 }

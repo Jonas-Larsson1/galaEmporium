@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <script src="jquery-3.7.1.js"></script>
+  <script src="https://kit.fontawesome.com/86e920b6e3.js" crossorigin="anonymous"></script>
   <script type="module" src="router.js" defer></script>
   <link rel="stylesheet" href="index.css">
 </head>
@@ -13,12 +14,15 @@
 <body>
   <header>
     <nav>
-      <a href="#">Home</a>
-      <a href="#club">Club</a>
-      <a href="#login">Login</a>
+      <a href="#" class="logo-text">Gala Emporium</a>
+      <div class="nav__container">
+        <a href="#club" class="nav__club">Club</a>
+        <div id="cart"><i class="fa-solid fa-cart-shopping cart-shopping"></i></div>
+        <button id="login-btn">Login</button>
+    </div>
     </nav>
   </header>
-  <main></main>
+  <main class="main"></main>
 
 </body>
 

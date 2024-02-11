@@ -1,11 +1,12 @@
 export default function club() {
 
-    let text = "blissful"
-  
-    return `
+    
+    let content = "";
+    content += `
     <article id="home">
-      <h1>Welcome to my ${text} page</h1>
-      <p>OBS! Glöm inte CSS.</p>
+      <h1>Info about club</h1>
+      <p>piu</p>
     </article>
     `
+    document.querySelector(".main").innerHTML = content;
   }
