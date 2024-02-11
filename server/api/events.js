@@ -7,7 +7,7 @@ const eventSchema = mongoose.Schema({
   cost: Number,
   max_attendees: Number,
   club_id: {type: Schema.Types.ObjectId, ref: "clubs"},
-  downloadURL: {type:String} 
+  img: {data: Buffer, type:String} 
 })
 
 const eventModel = mongoose.model('events', eventSchema)
@@ -26,7 +26,7 @@ export default function event(server) {
       date: req.body.date,
       max_attendees: req.body.max_attendees,
       club_id: req.body.club_id,
-      downloadURL: req.body.downloadURL})
+      img: req.body.img})
     const result = await newEvent.save()
     res.json(result)
     } catch(error){
