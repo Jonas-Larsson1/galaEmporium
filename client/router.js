@@ -2,11 +2,15 @@ import home from "./pages/home.js";
 import club from "./pages/club.js";
 import login from "./pages/login.js";
 import cart from "./components/cart.js"
+import updateNavbar from "./components/navbar.js"
 
-// ISSUE WITH CART
-// cart()
+// när html-fil är uppladdad
+$( document ).ready(function() {
+  updateNavbar()
+})
+
+
 $('aside').html(cart())
-
 
 
 async function route() {
@@ -23,9 +27,6 @@ async function route() {
     case "login":
       $('main').html(await login())
       break;
-    // case "cart":
-    //   $('aside').html(cart())
-    //   break;
     default:
       console.log("404 You've broken the internet")
   }
