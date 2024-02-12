@@ -1,5 +1,12 @@
 #home {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center; 
+}
 
-  color: orange;
-
+.clubCard {
+  background-color: #f0f0f0;
+  padding: 1rem;
+  margin: 1rem;
+  max-width: 10rem;
 }

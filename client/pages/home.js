@@ -6,8 +6,13 @@ export default async function home() {
   let clubs = await res.json()
 
   clubs.forEach(club => {
-    console.log(club)
+    html += `
+    <article class="clubCard">
+      <h1>${club.name}</h1>
+      <p>${club.description}</p>
+    </article>
+    `
   });
 
   return `<div id="home">${html}</div>`
-}
+} 
