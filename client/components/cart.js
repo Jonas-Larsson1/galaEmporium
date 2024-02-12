@@ -13,7 +13,7 @@ let lastItemWasAdded = null;
 // if nothing, initialise empty array
 let cartContents = JSON.parse(sessionStorage.getItem("cartContents")) || [];
 
-function checkIfSessionExpired() {
+function checkIfReservationExpired() {
   //if (cartContents.length > 0) {
 
   // if cart is not empty
@@ -68,7 +68,7 @@ addToCartBtn.addEventListener("click", () => {
   checkEmptyCartBtnState();
 
   // set timeout from addition to cart
-  setTimeout(checkIfSessionExpired, reservationTimeout);
+  setTimeout(checkIfReservationExpired, reservationTimeout);
 });
 
 function emptyCart() {
@@ -117,7 +117,7 @@ function updateCart() {
       // update time for last addition to cart
       lastItemWasAdded = new Date().getTime();
       // update timeout from last addition to cart
-      setTimeout(checkIfSessionExpired, reservationTimeout);
+      setTimeout(checkIfReservationExpired, reservationTimeout);
       updateCart();
       checkEmptyCartBtnState();
     });
@@ -154,4 +154,5 @@ function updateCart() {
 updateCart();
 checkEmptyCartBtnState();
 
-setTimeout(checkIfSessionExpired, reservationTimeout);
+// initial timeout for reservation expiration
+setTimeout(checkIfReservationExpired, reservationTimeout);
