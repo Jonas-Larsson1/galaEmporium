@@ -33,7 +33,7 @@ export default async function home() {
 } 
 
 const getClubEvents = async (clubId) => {
-  let clubEvents = await (await fetch(`/api/event/${clubId}`)).json()
+  let clubEvents = await (await fetch(`/api/clubEvents/${clubId}`)).json()
   return clubEvents
 }
 
