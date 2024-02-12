@@ -2,3 +2,24 @@
 const addToCartBtn = document.querySelector("#add-to-cart-btn");
 const emptyCartBtn = document.querySelector("#empty-cart-btn");
 const cartSummary = document.querySelector("#cart-summary");
+
+// for setting reservation timeout (20 min in millisec)
+const reservationTimeout = 20 * 60 * 1000;
+
+// for logging when item/s were last added to cart
+let lastItemWasAdded = null;
+
+function checkIfSessionExpired() {
+  //if (cartContents.length > 0) {
+
+  // if cart is not empty
+  if (lastItemWasAdded) {
+    const currentTime = new Date().getTime();
+    const timeElapsed = currentTime - lastItemWasAdded;
+    if (timeElapsed >= reservationTimeout) {
+      emptyCart();
+      alert("Your reservation has expired");
+    }
+  }
+  //}
+}
