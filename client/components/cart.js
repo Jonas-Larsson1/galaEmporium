@@ -80,3 +80,8 @@ function emptyCart() {
   // update cart here
   // check empty btn here
 }
+
+function emptyCartBtnState() {
+  // if nothing in cart: empty cart button disabled
+  emptyCartBtn.disabled = cartContents.length === 0;
+}
