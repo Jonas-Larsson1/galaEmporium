@@ -3,10 +3,10 @@ const addToCartBtn = document.querySelector("#add-to-cart-btn");
 const emptyCartBtn = document.querySelector("#empty-cart-btn");
 const cartSummary = document.querySelector("#cart-summary");
 
-// for setting reservation timeout (20 min in millisec)
+// reservation timeout 20 min (in millisec)
 const reservationTimeout = 20 * 60 * 1000;
 
-// for logging when item/s were last added to cart
+// for logging when item was last added to cart
 let lastItemWasAdded = null;
 
 // if anything in session storage, get it
@@ -45,3 +45,27 @@ class ClubTicket {
 // will need values from events database
 // this is a drill
 let bookClubTicket = new ClubTicket("Book Club Ticket", 100.00);
+
+addToCartBtn.addEventListener("click", () => {
+  let alreadyInCart = findItemByTitle(bookClubTicket.title);
+
+  // if ticket/s for chosen club already in cart: update object amount only
+  if (alreadyInCart) {
+    alreadyInCart.amount++;
+  }
+  // if ticket/s for chosen club not in cart: add object to array
+  else {
+    cartContents.push({
+      title: bookClubTicket.title,
+      amount: 1
+    });
+  }
+
+  // sets time for last addition to cart
+  lastItemWasAdded = new Date().getTime();
+
+  // update cart here
+  // check empty btn here
+
+  setTimeout(checkIfSessionExpired, reservationTimeout);
+});
