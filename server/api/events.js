@@ -6,7 +6,7 @@ const eventSchema = mongoose.Schema({
   date: Date,
   cost: Number,
   max_attendees: Number,
-  club_id: {type: Schema.Types.ObjectId, ref: "clubs"},
+  club_id: {type: mongoose.Schema.Types.ObjectId, ref: "clubs"},
   downloadURL: {type:String} 
 })
 
@@ -18,4 +18,9 @@ export default function event(server) {
     res.json(await eventModel.find())
   })
 
+  server.get('/api/event/:club_id', async (req, res) => {
+    res.json(await eventModel.find({
+      club_id: req.params.club_id
+    }))
+  })
 }

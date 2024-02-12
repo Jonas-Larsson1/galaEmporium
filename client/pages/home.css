@@ -1,12 +1,29 @@
 #home {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  justify-items: center; 
 }
 
 .clubCard {
   background-color: #f0f0f0;
   padding: 1rem;
   margin: 1rem;
-  max-width: 10rem;
+  width: auto;
+}
+
+.nextClubEvent {
+  margin-top: 0.5rem;
+}
+
+.nextClubEvent a {
+  font-size: 1.2rem;
+  color: rgb(98, 98, 255);
+  text-decoration: underline;
+}
+
+.nextClubEvent p {
+  color: dimgray;
+}
+
+.nextClubEvent b {
+  color: dimgray;
 }
