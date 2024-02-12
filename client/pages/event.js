@@ -8,9 +8,9 @@ export default async function event(){
 
     for(let data of result){
     html+= `
-        <h1>${data.name} </h1>
-        <h2>${data.description} </h2>
-        <h2>${data.club_id}</h2> 
+    <h1>${data.name} </h1>
+    <h2>${data.description} </h2>
+    <h2>${data.club_id}</h2> 
     <ol>    
         <li>Cost: ${data.cost}</li> 
         <li>Date: ${data.date}</li> 
