@@ -9,8 +9,8 @@ export default function cart() {
     </article>
     `
 
-    return cart_content
+    
     // document.querySelector(".main").innerHTML =  cart_content;
 
-    // $("aside").html(cart_content)
+    return  cart_content
   }
