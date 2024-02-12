@@ -63,6 +63,7 @@ export default function user(server) {
 
   server.delete('/api/login', async(req, res) => {
     if (req.session.user) {
+      req.session.destroy()
       res.status(200).json({
         message: "Succesfully logged out"
       })
