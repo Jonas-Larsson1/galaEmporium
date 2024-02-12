@@ -7,7 +7,8 @@ const eventSchema = mongoose.Schema({
   cost: Number,
   max_attendees: Number,
   club_id: {type: mongoose.Schema.Types.ObjectId, ref:"clubs"},
-  img: {data: Buffer, type:String} 
+  img: {data: Buffer, type:String},
+  tickets_left: Number
 })
 
 const eventModel = mongoose.model('events', eventSchema)
@@ -32,7 +33,8 @@ export default function event(server) {
       cost:req.body.cost,
       max_attendees: req.body.max_attendees,
       club_id: req.body.club_id,
-      img: req.body.img //Kommer inte att laddas upp som bild... 
+      img: req.body.img, //Kommer inte att laddas upp som bild... 
+      tickets_left:req.body.tickets_left 
     })
     const result = await newEvent.save()
     res.json(result)
