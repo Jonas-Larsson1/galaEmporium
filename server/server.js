@@ -6,6 +6,13 @@ import session from "express-session"
 const server = express()
 const port = 3000
 
+server.use(session({
+  secret: 'var_hemliga_tangent',
+  resave: false, 
+  saveUninitialized: true, 
+  cookie: { secure: false} 
+}))
+
 server.use(express.json())
 server.use(express.static('../client'))
 
