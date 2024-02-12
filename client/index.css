@@ -3,3 +3,8 @@
 
 /* import pages css */
 @import url("pages/home.css");
+
+* {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
