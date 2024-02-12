@@ -37,7 +37,10 @@ export default function register() {
     $('#register [name="name"]').val(''),
     $('#register [name="email"]').val(''),
     $('#register [name="password"]').val('')
-  })
+    console.log("successsssssss");
+    window.location = "#login";
+  }) 
+  
   .catch(error => {
     console.error('Error during login:', error);
   });

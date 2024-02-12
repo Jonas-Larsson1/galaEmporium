@@ -5,8 +5,6 @@ body {
 
 header {
   background-color: azure;
-<<<<<<< Updated upstream
-=======
   display: flex;
   justify-content: space-around;
 }
@@ -40,5 +38,4 @@ main{
 
 .cart-shopping{
   font-size: 25px;
->>>>>>> Stashed changes
 }

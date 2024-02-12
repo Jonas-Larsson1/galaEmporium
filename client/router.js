@@ -21,14 +21,17 @@ async function route() {
       console.log("HOME", home())
       $('main').html(home())
       break;
-    case "club":
+    case "mypage":
       $('main').html(club())
       break;
     case "register":
       $('main').html(await register())
       break;
     case "login":
-      $('main').html(login())
+      $('main').html(await login())
+      break;
+    case "cart":
+      $('main').html(cart())
       break;
     default:
       console.log("404 You've broken the internet")
