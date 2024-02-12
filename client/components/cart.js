@@ -65,7 +65,7 @@ addToCartBtn.addEventListener("click", () => {
   lastItemWasAdded = new Date().getTime();
 
   // update cart here
-  // check empty btn here
+  checkEmptyCartBtnState();
 
   setTimeout(checkIfSessionExpired, reservationTimeout);
 });
@@ -76,12 +76,21 @@ function emptyCart() {
     item.amount = 0;
   });
   cartContents = [];
+  // update session storage
   sessionStorage.setItem("cartContents", JSON.stringify(cartContents));
   // update cart here
-  // check empty btn here
+  checkEmptyCartBtnState();
 }
 
-function emptyCartBtnState() {
+function checkEmptyCartBtnState() {
   // if nothing in cart: empty cart button disabled
   emptyCartBtn.disabled = cartContents.length === 0;
 }
+
+// check initial state of btn
+checkEmptyCartBtnState();
+
+emptyCartBtn.addEventListener("click", () => {
+  emptyCart();
+});
+
