@@ -28,7 +28,20 @@ function checkIfSessionExpired() {
   //}
 }
 
-//for checking if there are already ticket/s for a given club in the cart
+// for checking if there are already ticket/s for a given club in the cart
 function findItemByTitle(title) {
   return cartContents.find(item => item.title === title)
 }
+
+// DUMMY
+class ClubTicket {
+  constructor(title, price) {
+    this.title = title;
+    this.price = price;
+    this.amount = 0;
+  }
+}
+
+// will need values from events database
+// this is a drill
+let bookClubTicket = new ClubTicket("Book Club Ticket", 100.00);
