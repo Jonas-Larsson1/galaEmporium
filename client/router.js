@@ -1,6 +1,17 @@
 import home from "./pages/home.js";
 import club from "./pages/club.js";
 import login from "./pages/login.js";
+import cart from "./components/cart.js"
+import updateNavbar from "./components/navbar.js"
+import register from "./pages/register.js";
+
+// cart();
+
+
+// när html-fil är uppladdad
+$( document ).ready(function() {
+  updateNavbar()
+})
 
 async function route() {
   //console.log(location)
@@ -12,6 +23,9 @@ async function route() {
       break;
     case "club":
       $('main').html(club())
+      break;
+    case "register":
+      $('main').html(await register())
       break;
     case "login":
       $('main').html(login())
