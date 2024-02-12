@@ -7,8 +7,7 @@ async function route() {
 
   switch (location.hash.replace('#', '')) {
     case "":
-      console.log("HOME", home())
-      $('main').html(home())
+      $('main').html(await home())
       break;
     case "club":
       $('main').html(club())

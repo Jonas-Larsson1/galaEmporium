@@ -1,11 +1,13 @@
-export default function home() {
+export default async function home() {
 
-  let text = "blissful"
+  let html = ``
 
-  return `
-  <article id="home">
-    <h1>Welcome to my ${text} page</h1>
-    <p>OBS! Glöm inte CSS.</p>
-  </article>
-  `
+  let res = await fetch('/api/club')
+  let clubs = await res.json()
+
+  clubs.forEach(club => {
+    console.log(club)
+  });
+
+  return `<div id="home">${html}</div>`
 }
