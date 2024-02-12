@@ -9,6 +9,10 @@ const reservationTimeout = 20 * 60 * 1000;
 // for logging when item/s were last added to cart
 let lastItemWasAdded = null;
 
+// if anything in session storage, get it
+// if nothing, initialise empty array
+let cartContents = JSON.parse(sessionStorage.getItem("cartContents")) || [];
+
 function checkIfSessionExpired() {
   //if (cartContents.length > 0) {
 
