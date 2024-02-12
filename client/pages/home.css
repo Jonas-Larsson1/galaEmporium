@@ -20,10 +20,6 @@
   text-decoration: underline;
 }
 
-.nextClubEvent p {
-  color: dimgray;
-}
-
-.nextClubEvent b {
+.nextClubEvent p, b, u {
   color: dimgray;
 }
