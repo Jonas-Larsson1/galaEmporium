@@ -47,9 +47,11 @@ export default function user(server) {
         })
       } 
       
-      const existingUser = userModel.findOne({
+      const existingUser = await userModel.findOne({
         email: req.body.email
       })
+
+      console.log(existingUser)
 
       if (existingUser) {
         return res.status(409).json({
