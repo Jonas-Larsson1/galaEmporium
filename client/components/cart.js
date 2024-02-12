@@ -69,3 +69,14 @@ addToCartBtn.addEventListener("click", () => {
 
   setTimeout(checkIfSessionExpired, reservationTimeout);
 });
+
+function emptyCart() {
+  // empty array of cart content
+  cartContents.forEach(item => {
+    item.amount = 0;
+  });
+  cartContents = [];
+  sessionStorage.setItem("cartContents", JSON.stringify(cartContents));
+  // update cart here
+  // check empty btn here
+}
