@@ -4,14 +4,28 @@
 }
 
 .clubCard {
+  position: relative;
   background-color: #f0f0f0;
   padding: 1rem;
   margin: 1rem;
-  width: auto;
+}
+
+.clubCardContent {
+  position: relative;
+}
+
+.clubCardContent img {
+  object-fit: cover;
+  height: auto;
+  max-width: 100%; 
+  display: block; 
 }
 
 .nextClubEvent {
-  margin-top: 0.5rem;
+  position: absolute;
+  margin: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 1rem;
 }
 
 .nextClubEvent a {
@@ -23,3 +37,5 @@
 .nextClubEvent p, b, u {
   color: dimgray;
 }
+
+

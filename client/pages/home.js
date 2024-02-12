@@ -12,21 +12,25 @@ export default async function home() {
     clubEvents[0] ? nextEvent = clubEvents[0] : nextEvent = {
       name: "No upcomming events",
       description: "",
-      date: ""
+      date: "",
+      img: "../images/default.jpg"
     }
 
     html += `
     <article class="clubCard">
       <h1>${club.name}</h1>
       <p>${club.description}</p>
-      <div class="nextClubEvent">
-        <b>Next event:</b>
-        <br>
-        <a>${nextEvent.name}</a>
-        <br>
-        <u>${isValidDate(nextEvent.date) ? utcToDate(nextEvent.date) : ""}</u>
-        <p>${nextEvent.description}</p>
-      <div>
+      <div class="clubCardContent">
+        <div class="nextClubEvent">
+          <b>Next event:</b>
+          <br>
+          <a>${nextEvent.name}</a>
+          <br>
+          <u>${isValidDate(nextEvent.date) ? utcToDate(nextEvent.date) : ""}</u>
+          <p>${nextEvent.description}</p>
+        </div>
+        <img src="${nextEvent.img}">
+    </div>
     </article>
     `
   };
