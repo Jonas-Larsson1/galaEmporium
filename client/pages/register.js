@@ -37,12 +37,16 @@ export default function register() {
     $('#register [name="name"]').val(''),
     $('#register [name="email"]').val(''),
     $('#register [name="password"]').val('')
-    console.log("successsssssss");
-    window.location = "#login";
+    if (data.user_id) {
+      alert('Du är registrerad! Dags att logga in');
+      window.location.hash = "#login"
+    } else {
+      alert('FEL ' + data.message);
+    }
   }) 
   
   .catch(error => {
-    console.error('Error during login:', error);
+    console.error('Gick inte att registrera ett nytt konto ', error);
   });
   
   }
