@@ -16,5 +16,15 @@ export default async function event(){
         <li>Date: ${data.date}</li> 
    </ol>`
     }
-    return <article>${html}</article>
+    return `<article>${html}</article>`
 }
+
+/* export default function createEvent(){
+    return `
+        <form> 
+        <h1> Create Event </h1> 
+        <input type="text" name="name" placeholder="Event name">
+        <input type="tetxt" name="description" placeholder="Event description">
+        </form>
+    `
+} */

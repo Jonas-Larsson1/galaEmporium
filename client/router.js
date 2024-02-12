@@ -1,14 +1,14 @@
 import home from "./pages/home.js";
 import club from "./pages/club.js";
 import login from "./pages/login.js";
+import event from "./pages/event.js";
 
 async function route() {
   //console.log(location)
 
   switch (location.hash.replace('#', '')) {
     case "":
-      console.log("HOME", home())
-      $('main').html(home())
+      $('main').html(await event())
       break;
     case "club":
       $('main').html(club())
