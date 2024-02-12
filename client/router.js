@@ -5,6 +5,7 @@ import cart from "./components/cart.js"
 
 // ISSUE WITH CART
 // cart()
+$('aside').html(cart())
 
 
 
@@ -22,8 +23,9 @@ async function route() {
     case "login":
       $('main').html(await login())
       break;
-    case "cart":
-      $('main').html(await cart())
+    // case "cart":
+    //   $('aside').html(cart())
+    //   break;
     default:
       console.log("404 You've broken the internet")
   }
