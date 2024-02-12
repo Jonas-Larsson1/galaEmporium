@@ -13,4 +13,6 @@ export default function club(server) {
     res.json(await clubModel.find())
   })
 
+
+
 }
