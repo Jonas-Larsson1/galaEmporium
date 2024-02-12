@@ -21,8 +21,11 @@ async function route() {
       console.log("HOME", home())
       $('main').html(home())
       break;
-    case "club":
+    case "mypage":
       $('main').html(club())
+      break;
+    case "cart":
+      $('main').html(login())
       break;
     case "register":
       $('main').html(await register())

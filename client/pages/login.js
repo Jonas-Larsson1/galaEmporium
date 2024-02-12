@@ -24,21 +24,21 @@ export default function login() {
   console.log(data)
   
 
-  fetch('/api/user', {
+  fetch('/api/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   })
-  .then(response => response.json())
+
   .then(data => {
     console.log('Login response:', data);
     $('#login [name="email"]').val('');
     $('#login [name="password"]').val('');
+
+    window.location.hash = '#'; 
   })
-  .catch(error => {
-    console.error('Error during login:', error);
-  });
+
 }
 
