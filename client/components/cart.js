@@ -61,12 +61,13 @@ addToCartBtn.addEventListener("click", () => {
     });
   }
 
-  // sets time for last addition to cart
+  // sets time for addition to cart
   lastItemWasAdded = new Date().getTime();
 
   updateCart();
   checkEmptyCartBtnState();
 
+  // set timeout from addition to cart
   setTimeout(checkIfSessionExpired, reservationTimeout);
 });
 
@@ -115,6 +116,7 @@ function updateCart() {
       item.amount++;
       // update time for last addition to cart
       lastItemWasAdded = new Date().getTime();
+      // update timeout from last addition to cart
       setTimeout(checkIfSessionExpired, reservationTimeout);
       updateCart();
       checkEmptyCartBtnState();
@@ -136,12 +138,12 @@ function updateCart() {
           }
         }
         updateCart();
+        // if amount of item becoming zero also empties the cart, empty cart button will disable here
         checkEmptyCartBtnState();
       }
     });
     newRow.append(newAddBtn);
     newRow.append(newSubtractBtn);
-
     cartSummary.append(newRow);
   });
 
@@ -151,3 +153,5 @@ function updateCart() {
 
 updateCart();
 checkEmptyCartBtnState();
+
+setTimeout(checkIfSessionExpired, reservationTimeout);
