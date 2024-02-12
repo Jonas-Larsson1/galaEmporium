@@ -64,7 +64,7 @@ addToCartBtn.addEventListener("click", () => {
   // sets time for last addition to cart
   lastItemWasAdded = new Date().getTime();
 
-  // update cart here
+  updateCart();
   checkEmptyCartBtnState();
 
   setTimeout(checkIfSessionExpired, reservationTimeout);
@@ -78,13 +78,18 @@ function emptyCart() {
   cartContents = [];
   // update session storage
   sessionStorage.setItem("cartContents", JSON.stringify(cartContents));
-  // update cart here
+  updateCart();
   checkEmptyCartBtnState();
 }
 
 function checkEmptyCartBtnState() {
   // if nothing in cart: empty cart button disabled
-  emptyCartBtn.disabled = cartContents.length === 0;
+  if (cartContents.length === 0) {
+    emptyCartBtn.disabled = true;
+    cartSummary.textContent = "Your cart is currently empty";
+  } else {
+    emptyCartBtn.disabled = false;
+  }
 }
 
 // check initial state of btn
@@ -94,3 +99,55 @@ emptyCartBtn.addEventListener("click", () => {
   emptyCart();
 });
 
+function updateCart() {
+  // empty element if anything is added to cart
+  cartSummary.textContent = "";
+
+  // list added items
+  cartContents.forEach(item => {
+    const newRow = document.createElement("div");
+    newRow.textContent = `${item.title} ${item.amount}`;
+
+    // button to add more tickets to chosen event
+    const newAddBtn = document.createElement("button");
+    newAddBtn.textContent = "+";
+    newAddBtn.addEventListener("click", () => {
+      item.amount++;
+      // update time for last addition to cart
+      lastItemWasAdded = new Date().getTime();
+      setTimeout(checkIfSessionExpired, reservationTimeout);
+      updateCart();
+      checkEmptyCartBtnState();
+    });
+
+    // button to subtract tickets from cart
+    const newSubtractBtn = document.createElement("button");
+    newSubtractBtn.textContent = "–";
+
+    newSubtractBtn.addEventListener("click", () => {
+      // if there are more than zero tickets: subtract
+      if (item.amount > 0) {
+        item.amount--;
+        // if by clicking button amount becomes zero: remove item
+        if (item.amount === 0) {
+          const index = cartContents.indexOf(item);
+          if (index !== -1) {
+            cartContents.splice(index, 1);
+          }
+        }
+        updateCart();
+        checkEmptyCartBtnState();
+      }
+    });
+    newRow.append(newAddBtn);
+    newRow.append(newSubtractBtn);
+
+    cartSummary.append(newRow);
+  });
+
+  // update session storage
+  sessionStorage.setItem("cartContents", JSON.stringify(cartContents));
+}
+
+updateCart();
+checkEmptyCartBtnState();
