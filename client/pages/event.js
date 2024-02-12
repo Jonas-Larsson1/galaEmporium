@@ -7,10 +7,11 @@ export default async function event(){
     let html = ""
 
     for(let data of result){
+        console.log(data)
     html+= `
     <h1>${data.name} </h1>
     <h2>${data.description} </h2>
-    <h2>${data.club_id}</h2> 
+    <h2>${data.club_id.name}</h2> 
     <ol>    
         <li>Cost: ${data.cost}</li> 
         <li>Date: ${data.date}</li> 
