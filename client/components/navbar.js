@@ -27,6 +27,7 @@ const updateNavbar = () => {
                 // isInloggad = true;
                 // updateNavbar()
                 //ÄNDRA LOCATION TILL LOGIN SIDA
+                window.location = "#login"
             });
 
 

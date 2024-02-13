@@ -3,6 +3,7 @@ import club from "./pages/club.js";
 import login from "./pages/login.js";
 import cart from "./components/cart.js"
 import updateNavbar from "./components/navbar.js"
+import register from "./pages/register.js";
 
 // cart();
 
@@ -20,14 +21,17 @@ async function route() {
       console.log("HOME", home())
       $('main').html(home())
       break;
-    case "mypage": // ändra funktion
-      $('main').html(await club())
+    case "mypage":
+      $('main').html(club())
+      break;
+    case "register":
+      $('main').html(await register())
       break;
     case "login":
       $('main').html(await login())
       break;
     case "cart":
-      $('main').html(await cart())
+      $('main').html(cart())
       break;
     default:
       console.log("404 You've broken the internet")
