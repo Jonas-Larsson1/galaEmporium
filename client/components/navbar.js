@@ -7,7 +7,7 @@ const updateNavbar = () => {
         
         navContainer.empty();
 
-        if (data.isInloggad){
+        if (data.loggedIn){
             console.log("loggedin")
             content += `
                 <a href="#mypage">Mina Sidor</a>
@@ -16,7 +16,7 @@ const updateNavbar = () => {
             `
             $('.nav__container').html(content)
             $('#logout-btn').click(function() {
-                !data.isInloggad;
+                !data.loggedIn;
                 updateNavbar()
             })
         } else {

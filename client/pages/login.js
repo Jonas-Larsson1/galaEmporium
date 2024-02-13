@@ -17,13 +17,14 @@ export default function login() {
  async function submitForm(event) {
   event.preventDefault();
   console.log('submitted')
+
   const data = {
     email: $('#login [name="email"]').val(),
     password: $('#login [name="password"]').val()
   }
   console.log(data)
-  
 
+  
   fetch('/api/login', {
     method: 'POST',
     headers: {
@@ -32,13 +33,19 @@ export default function login() {
     body: JSON.stringify(data),
   })
 
+  .then(response => response.json())
   .then(data => {
-    console.log('Login response:', data);
-    $('#login [name="email"]').val('');
-    $('#login [name="password"]').val('');
-
-    window.location.hash = '#'; 
+    
+    if (data.loggedIn) {
+      alert('Login successful!');
+      window.location.hash = '#mypage';
+    } else {
+      alert('Login failed: Invalid email or password.');
+    }
   })
+  .catch(error => {
+    console.error('Error during login:', error);
+  });
 
 }
 
