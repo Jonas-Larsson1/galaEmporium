@@ -7,17 +7,31 @@ const bookingSchema = mongoose.Schema({
   paid: Boolean  
 })
 
-const bookingModel = mongoose.model('bookings', bookingSchema)
+const bookingModel = mongoose.model('bookings', bookingSchema);
 
 export default function booking(server) {
 
   server.get('/api/bookings', async (req, res) => {
     try {
-      res.json(await bookingModel.find())
+      res.json(await bookingModel.find());
     } catch (error) {
-      res.status(500).json({ message: "There was a problem fetching bookings from the server." })
+      res.status(500).json({ message: "There was a problem fetching bookings from the server." });
     }
-  })
+  });
+
+  server.get('/api/bookings', async (req, res) => {
+    try {
+      if(req.session.user) {
+        const userId = req.session.user;
+        const userBookings = await bookingModel.find({ user_id: userId });
+        res.json(userBookings)
+      } else {
+        res.status(403).json({ message: "You need to be logged in!" });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "There was a problem fetching bookings from the server." });
+    }
+  });
 
   server.post('/api/bookings', async (req, res) => {
     try {
@@ -36,6 +50,5 @@ export default function booking(server) {
     } catch (error) {
       res.status(500).json({ message: "There was a problem adding the booking." });
     }
-  })
-
+  });
 }
