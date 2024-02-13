@@ -1,8 +1,6 @@
 body {
   background-color: darkslategrey;
   font-family: Ephesis;
-  width: 100%;
-
 }
 
 header {
@@ -21,14 +19,11 @@ nav {
   padding: 0 2rem 0 2rem;
 }
 
-<<<<<<< HEAD
-=======
 main{
   display: flex;
   justify-content: center;
 }
 
->>>>>>> feature/register-client
 .nav__container{
   width: 20%;
   display: flex;
