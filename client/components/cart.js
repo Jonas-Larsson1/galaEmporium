@@ -1,4 +1,4 @@
-// issues: reservation timeout stops on reload, will need to store lastItemWasAdded value in session
+// issues: reservation timeout stops on reload, will need to fix later
 
 // access elements in html
 const addToCartBtn = document.querySelector("#add-to-cart-btn");
@@ -9,19 +9,29 @@ const cartSummary = document.querySelector("#cart-summary");
 const reservationTimeout = 20 * 60 * 1000;
 
 // for logging when item was last added to cart
-let lastItemWasAdded = null;
-console.log("initial value of lastItemWasAdded ", lastItemWasAdded);
+//let timeWhenLastItemWasAdded = null;
+//console.log("initial value of lastItemWasAdded ", timeWhenLastItemWasAdded);
 
 // if anything in session storage, get it
 // if nothing, initialise empty array
 let cartContents = JSON.parse(sessionStorage.getItem("cartContents")) || [];
+let timeWhenLastItemWasAdded;
+let sessionStorageTimestamp = sessionStorage.getItem("timeWhenLastItemWasAdded");
+
+// if timestamp in sessionStorage is not null, get it
+// if no timestamp in sessionStorage, initialise null timestamp
+sessionStorageTimestamp ? timeWhenLastItemWasAdded = JSON.parse(sessionStorageTimestamp) : timeWhenLastItemWasAdded = null;
+//let timeWhenLastItemWasAdded = JSON.parse(sessionStorage.getItem("timeWhenLastItemWasAdded"));
+console.log(1, timeWhenLastItemWasAdded);
+
+window.addEventListener("load", checkIfReservationExpired);
 
 function checkIfReservationExpired() {
   // if the value of lastItemWasAdded is not null (then cart is not empty)
-  console.log("first value of lastItemWasAdded inside checkIfReservationExpired function ", lastItemWasAdded);
-  if (lastItemWasAdded) {
+  console.log("value of timeWhenLastItemWasAdded in checkIfReservationExpired function", timeWhenLastItemWasAdded);
+  if (timeWhenLastItemWasAdded) {
     const currentTime = new Date().getTime();
-    const timeElapsed = currentTime - lastItemWasAdded;
+    const timeElapsed = currentTime - timeWhenLastItemWasAdded;
     if (timeElapsed >= reservationTimeout) {
       emptyCart();
       alert("Your reservation has expired");
@@ -63,8 +73,9 @@ addToCartBtn.addEventListener("click", () => {
   }
 
   // sets time for addition to cart
-  lastItemWasAdded = new Date().getTime();
-
+  timeWhenLastItemWasAdded = new Date().getTime();
+  sessionStorage.setItem("timeWhenLastItemWasAdded", JSON.stringify(timeWhenLastItemWasAdded));
+  console.log("value of timeWhenLastItemWasAdded after being added with 'add to cart' btn ", timeWhenLastItemWasAdded);
   updateCart();
   checkEmptyCartBtnState();
 
@@ -78,8 +89,9 @@ function emptyCart() {
     item.amount = 0;
   });
   cartContents = [];
-  lastItemWasAdded = null;
-  console.log("end value of lastItemWasAdded inside emptyCart function ", lastItemWasAdded);
+  timeWhenLastItemWasAdded = null;
+  sessionStorage.setItem("timeWhenLastItemWasAdded", JSON.stringify(timeWhenLastItemWasAdded));
+  console.log("value of timeWhenLastItemWasAdded inside emptyCart function ", timeWhenLastItemWasAdded);
   // update session storage
   sessionStorage.setItem("cartContents", JSON.stringify(cartContents));
   updateCart();
@@ -118,7 +130,9 @@ function updateCart() {
     newAddBtn.addEventListener("click", () => {
       item.amount++;
       // update time for last addition to cart
-      lastItemWasAdded = new Date().getTime();
+      timeWhenLastItemWasAdded = new Date().getTime();
+      sessionStorage.setItem("timeWhenLastItemWasAdded", JSON.stringify(timeWhenLastItemWasAdded));
+      console.log("value of timeWhenLastItemWasAdded after clicking add button in cart ", timeWhenLastItemWasAdded)
       // update timeout from last addition to cart
       setTimeout(checkIfReservationExpired, reservationTimeout);
       updateCart();
