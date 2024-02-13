@@ -45,11 +45,13 @@ export default function register() {
     }
   }) 
   
-  .catch(error => {
-    console.error('Gick inte att registrera ett nytt konto ', error);
-  });
-  
+    window.location = "#login"
   }
+  // .catch(error => {
+  //   console.error('Gick inte att registrera ett nytt konto ', error);
+  // });
+  
+  
 
 
   // ADD SUCCESS ALERT

@@ -17,28 +17,35 @@ export default function login() {
  async function submitForm(event) {
   event.preventDefault();
   console.log('submitted')
+
   const data = {
     email: $('#login [name="email"]').val(),
     password: $('#login [name="password"]').val()
   }
   console.log(data)
-  
 
-  fetch('/api/user', {
+  
+  fetch('/api/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   })
+
   .then(response => response.json())
   .then(data => {
-    console.log('Login response:', data);
-    $('#login [name="email"]').val('');
-    $('#login [name="password"]').val('');
+    
+    if (data.loggedIn) {
+      alert('Login successful!');
+      window.location.hash = '#mypage';
+    } else {
+      alert('Login failed: Invalid email or password.');
+    }
   })
   .catch(error => {
     console.error('Error during login:', error);
   });
+
 }
 
