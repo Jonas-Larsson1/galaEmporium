@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
+nav {
+    height: 13vh;
+    width: 85%;
+    background-color: #8dc6ff;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem 0 2rem;
+    border-bottom: black 2px solid;
+  }
+
+  .nav__container{
+    /* width: 20%; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  #login-btn{
+    height: 2rem;
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: white;
+  }
+
+  #login-btn:hover{
+    cursor: pointer;
+    filter: drop-shadow(0 0 0.2rem #006dff);
+  }
+  
+.logo-text{
+    font-family: "Dancing Script", cursive;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    font-size: 30px;
+    text-decoration: none;
+    /* color: blue; */
+    color: black;
+}
+
+  .cart-shopping{
+    font-size: 25px;
+  }
