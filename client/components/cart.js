@@ -1,3 +1,5 @@
+// issues: reservation timeout stops on reload, will need to store lastItemWasAdded value in session
+
 // access elements in html
 const addToCartBtn = document.querySelector("#add-to-cart-btn");
 const emptyCartBtn = document.querySelector("#empty-cart-btn");
@@ -8,15 +10,15 @@ const reservationTimeout = 20 * 60 * 1000;
 
 // for logging when item was last added to cart
 let lastItemWasAdded = null;
+console.log("initial value of lastItemWasAdded ", lastItemWasAdded);
 
 // if anything in session storage, get it
 // if nothing, initialise empty array
 let cartContents = JSON.parse(sessionStorage.getItem("cartContents")) || [];
 
 function checkIfReservationExpired() {
-  //if (cartContents.length > 0) {
-
-  // if cart is not empty
+  // if the value of lastItemWasAdded is not null (then cart is not empty)
+  console.log("first value of lastItemWasAdded inside checkIfReservationExpired function ", lastItemWasAdded);
   if (lastItemWasAdded) {
     const currentTime = new Date().getTime();
     const timeElapsed = currentTime - lastItemWasAdded;
@@ -25,7 +27,6 @@ function checkIfReservationExpired() {
       alert("Your reservation has expired");
     }
   }
-  //}
 }
 
 // for checking if there are already ticket/s for a given club in the cart
@@ -77,6 +78,8 @@ function emptyCart() {
     item.amount = 0;
   });
   cartContents = [];
+  lastItemWasAdded = null;
+  console.log("end value of lastItemWasAdded inside emptyCart function ", lastItemWasAdded);
   // update session storage
   sessionStorage.setItem("cartContents", JSON.stringify(cartContents));
   updateCart();
@@ -153,6 +156,3 @@ function updateCart() {
 
 updateCart();
 checkEmptyCartBtnState();
-
-// initial timeout for reservation expiration
-setTimeout(checkIfReservationExpired, reservationTimeout);
