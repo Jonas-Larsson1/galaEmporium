@@ -37,10 +37,10 @@ export default function login() {
   .then(data => {
     
     if (data.loggedIn) {
-      alert('Login successful!');
+      // alert('Login successful!');
       window.location.hash = '#mypage';
     } else {
-      alert('Login failed: Invalid email or password.');
+      // alert('Login failed: Invalid email or password.');
     }
   })
   .catch(error => {
