@@ -3,7 +3,7 @@ export default function register() {
   
     registerContent += `
       <form id="register">
-        <input type="text" name="name" placeholder="Ange ditt namn">
+        <input type="text" name="name" placeholder="Ange ditt namn" required>
         <input type="email" name="email" placeholder="Email" required>
         <input type="password" name="password" placeholder="Lösenord" required>
         <button type='submit'>REGISTRERA</button>
@@ -45,11 +45,12 @@ export default function register() {
     }
   }) 
   
-    window.location = "#login"
+  .catch(error => {
+    console.error('Error during registration:', error);
+    alert('Registration failed.');
+    });
   }
-  // .catch(error => {
-  //   console.error('Gick inte att registrera ett nytt konto ', error);
-  // });
+ 
   
   
 

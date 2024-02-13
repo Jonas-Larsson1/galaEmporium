@@ -1,12 +1,14 @@
+import updateNavbar from '../components/navbar.js'
+
 export default function login() {
   let loginContent = "";
 
   loginContent += `
     <form id="login">
-      <input type="email" name="email" placeholder="Email" required>
-      <input type="password" name="password" placeholder="Lösenord" required>
-      <button type='submit'>LOGGA IN</button>
-      <a href="#register" class="register">Registrera dig</a>
+      <input class="login-input" type="email" name="email" placeholder="Email" required>
+      <input class="login-input" type="password" name="password" placeholder="Lösenord" required>
+      <button class="submit" type='submit'>LOGGA IN</button>
+      <a href="#register" class="register">SKAPA KONTO</a>
     </form>
   `
  
@@ -37,14 +39,16 @@ export default function login() {
   .then(data => {
     
     if (data.loggedIn) {
-      // alert('Login successful!');
+      alert('Login successful!');
       window.location.hash = '#mypage';
+      updateNavbar();
     } else {
-      // alert('Login failed: Invalid email or password.');
+      alert('Login failed: Invalid email or password.');
     }
   })
   .catch(error => {
     console.error('Error during login:', error);
+    alert('Login failed.');
   });
 
 }

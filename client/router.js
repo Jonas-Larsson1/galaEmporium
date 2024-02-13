@@ -25,7 +25,7 @@ async function route() {
       $('main').html(club())
       break;
     case "cart":
-      $('main').html(login())
+      $('main').html(cart())
       break;
     case "register":
       $('main').html(await register())
