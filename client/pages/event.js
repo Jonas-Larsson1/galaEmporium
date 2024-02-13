@@ -23,7 +23,7 @@ export default async function event(){
 
  export function createEvent(){
     return `
-        <form> 
+        <form onsubmit= "submitEvent(); return false"> 
         <h1> Create Event </h1> 
         <input type="text" name="name" placeholder="Event name">
         <input type="text" name="image" placeholder="Insert image URL">
@@ -35,6 +35,33 @@ export default async function event(){
         <input type="text" name="description" placeholder="Event description">
         <input type="number" name="cost" placeholder="Ticket cost">
         <input type="date" name="date" placeholder="Date for event"> 
+        <input type="submit" value="Publish your event!">
         </form>
     `
 } 
+
+  async function submitEvent(){
+    
+    console.log("submitted")
+   
+    const data = {
+        name: $(' [name="name"]').val(),
+        image: $(' [name="image"]').val(),
+        club: $(' [name="club"]').val(),
+        description: $('[name="description"]').val(),
+        cost: $(' [name="cost"]').val(),
+        date: $(' [name="date"]').val()
+    }
+    console.log(data)
+    const result = await fetch('api/event', {
+        method: 'post',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    console.log('result', result)
+   
+}
+
+window.submitEvent = submitEvent
