@@ -3,10 +3,10 @@ export default function register() {
   
     registerContent += `
       <form id="register">
-        <input type="text" name="name" placeholder="Ange ditt namn" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Lösenord" required>
-        <button type='submit'>REGISTRERA</button>
+        <input class="register-input" type="text" name="name" placeholder="Ange ditt namn" required>
+        <input class="register-input" type="email" name="email" placeholder="Email" required>
+        <input class="register-input" type="password" name="password" placeholder="Lösenord" required>
+        <button class="submit" type='submit'>SKAPA KONTO</button>
       </form>
     `
    
