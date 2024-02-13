@@ -38,7 +38,7 @@ export default function register() {
     $('#register [name="email"]').val(''),
     $('#register [name="password"]').val('')
     if (data.user_id) {
-      alert('Du är registrerad! Dags att logga in');
+      alert('Du är registrerad! Det är dags att logga in');
       window.location.hash = "#login"
     } else {
       alert('FEL ' + data.message);
@@ -46,8 +46,8 @@ export default function register() {
   }) 
   
   .catch(error => {
-    console.error('Error during registration:', error);
-    alert('Registration failed.');
+    console.error('Fel vid registrering:', error);
+    alert('Registreringen misslyckades.');
     });
   }
  

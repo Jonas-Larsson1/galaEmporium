@@ -39,16 +39,16 @@ export default function login() {
   .then(data => {
     
     if (data.loggedIn) {
-      alert('Login successful!');
+      alert('Du är inloggad!');
       window.location.hash = '#mypage';
       updateNavbar();
     } else {
-      alert('Login failed: Invalid email or password.');
+      alert('Gick inte att logga in: fel lösenord eller mailadress.');
     }
   })
   .catch(error => {
-    console.error('Error during login:', error);
-    alert('Login failed.');
+    console.error('Fel vid inloggning:', error);
+    alert('Gick inte att logga in.');
   });
 
 }

@@ -12,27 +12,6 @@ const updateNavbar = () => {
                 <a href="#cart" id="cart"><i class="fa-solid fa-cart-shopping"></i></a>
                 <button id="logout-btn">Logout</button>
             `
-            // navContainer.html(content)
-            // $('#logout-btn').click(function() {
-            //     fetch('/api/login', { 
-            //         method: 'DELETE',
-            //       })
-            //       .then(response => response.json())
-            //       .then(data => {
-            //         if (response.ok) {
-            //           alert(data.message);
-            //           window.location.hash = '#login'; 
-            //           updateNavbar(); // Refresh navbar to reflect logged-out state
-            //         } else {
-            //             alert(data.message)
-            //         }
-            //       })
-            //       .catch(error => 
-            //         {
-            //             console.error("Det gick inte att logga ut", error);
-            //             alert("Fel vid utloggning")
-            //         });
-            //     });
             } else {
                 console.log("Användaren är inloggad", data.loggedIn)
                 content = '<button id="login-btn">Logga in</button>'
@@ -46,27 +25,24 @@ const updateNavbar = () => {
                 })
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Failed to logout');
+                        throw new Error('Gick inte att logga ut');
                     }
                     return response.json();
                 })
                 .then(data => {
-                    alert('Successfully logged out.');
+                    alert('Du är utloggad.');
                     window.location.hash = '#login'; 
-                    updateNavbar(); // Refresh navbar to reflect logged-out state
+                    updateNavbar(); 
                 })
                 .catch(error => {
-                    console.error("Logout failed", error);
-                    alert("Logout error");
+                    console.error('Gick inte att logga ut', error);
+                    alert('Fel vid utloggning');
                 });
             });
 
 
             $('#login-btn').click(function() {
                 console.log('clicked')
-                // isInloggad = true;
-                // updateNavbar()
-                //ÄNDRA LOCATION TILL LOGIN SIDA
                 window.location.hash = "#login"
             });
 
