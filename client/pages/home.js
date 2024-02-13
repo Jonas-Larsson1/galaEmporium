@@ -8,6 +8,11 @@ export default async function home() {
 
   for (const club of clubs) {
     let clubEvents = await getClubEvents(club._id)
+    clubEvents.sort((a, b) => {
+      return new Date(a.date) - new Date(b.date)
+    })
+
+
     let nextEvent
     clubEvents[0] ? nextEvent = clubEvents[0] : nextEvent = {
       name: "No upcomming events",
