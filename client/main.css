@@ -1,10 +1,11 @@
+
 body {
   background-color: white;
   font-family: Ephesis;
 }
 
 header {
-  background-color: azure;
+  background-color: white;
   display: flex;
   justify-content: space-around;
 }
