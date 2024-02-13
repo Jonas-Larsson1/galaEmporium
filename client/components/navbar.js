@@ -8,7 +8,7 @@ const updateNavbar = () => {
         if (data.loggedIn){
             console.log("Användaren är inloggad")
             content += `
-                <a href="#mypage">Mina Sidor</a>
+                <a href="#mypage" id="mypage">Mina Sidor</a>
                 <a href="#cart" id="cart"><i class="fa-solid fa-cart-shopping"></i></a>
                 <button id="logout-btn">Logout</button>
             `

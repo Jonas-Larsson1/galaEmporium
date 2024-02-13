@@ -19,7 +19,7 @@ nav {
   }
   
   #login-btn{
-    height: 2rem;
+    height: 2.2rem;
     border: 1px solid black;
     border-radius: 15px;
     background-color: white;
@@ -29,6 +29,20 @@ nav {
     cursor: pointer;
     filter: drop-shadow(0 0 0.2rem #006dff);
   }
+
+  #logout-btn{
+    height: 2.2rem;
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: white;
+    margin-left: 25px
+  }
+
+  #logout-btn:hover{
+    cursor: pointer;
+    filter: drop-shadow(0 0 0.2rem #006dff);
+  }
+  
   
 .logo-text{
     font-family: "Dancing Script", cursive;
@@ -41,6 +55,23 @@ nav {
     color: black;
 }
 
-  .cart-shopping{
-    font-size: 25px;
+  #cart{
+    font-size: 22px;
+    margin-left: 25px;
+    color: black;
+  }
+
+  #cart:hover{
+    cursor: pointer;
+    filter: drop-shadow(0 0 0.2rem #006dff);
+  }
+
+  #mypage{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+  }
+
+  #mypage:hover{
+    filter: drop-shadow(0 0 0.2rem #006dff);
   }
