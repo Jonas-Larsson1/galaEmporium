@@ -4,6 +4,8 @@
 /* import pages css */
 @import url("pages/home.css");
 
+@import url("pages/club.css");
+
 * {
     margin: 0;
     font-family: 'Poppins', sans-serif;
