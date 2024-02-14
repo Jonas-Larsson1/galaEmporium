@@ -13,6 +13,9 @@ export default function club(server) {
     res.json(await clubModel.find())
   })
 
-
+  server.get('/api/club/:id', async (req, res) => {
+    const club = await clubModel.findById(req.params.id)
+    res.json(club)
+  })
 
 }

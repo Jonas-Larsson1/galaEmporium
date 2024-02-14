@@ -23,7 +23,9 @@ export default async function home() {
 
     html += `
     <article class="clubCard">
+      <a href="#club?${club._id}">
         <h1>${club.name}</h1>
+      </a>
       <p>${club.description}</p>
       <div class="clubCardContent">
         <div class="nextClubEvent">

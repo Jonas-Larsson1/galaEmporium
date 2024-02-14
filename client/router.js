@@ -3,14 +3,14 @@ import club from "./pages/club.js";
 import login from "./pages/login.js";
 
 async function route() {
-  //console.log(location)
-
-  switch (location.hash.replace('#', '')) {
+  const hash = location.hash.replace('#', '')
+  const param = hash.split('?')[1]
+  switch (hash.split('?')[0]) {
     case "":
       $('main').html(await home())
       break;
     case "club":
-      $('main').html(club())
+      $('main').html(await club(param))
       break;
     case "login":
       $('main').html(login())
