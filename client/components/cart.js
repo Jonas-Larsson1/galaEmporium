@@ -4,9 +4,6 @@ import { reservationTimeout, checkIfReservationExpired } from "./reservation-exp
 import { findItemByTitle } from "./process-data-utils.js";
 import { updateCart } from "./update-cart.js";
 
-// reservation timeout 20 min (in millisec)
-const reservationTimeout = 20 * 60 * 1000;
-
 // for logging when item was last added to cart
 //let timeWhenLastItemWasAdded = null;
 //console.log("initial value of lastItemWasAdded ", timeWhenLastItemWasAdded);
