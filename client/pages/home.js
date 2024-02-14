@@ -3,7 +3,7 @@ import { utcToDate, isValidDate } from "../functions/utcToDate.js"
 export default async function home() {
 
   let html = ``
-
+  
   let clubs = await (await fetch('/api/club')).json()
 
   for (const club of clubs) {
