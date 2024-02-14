@@ -74,3 +74,8 @@ emptyCartBtn.addEventListener("click", () => {
 
 updateCart(cartContents);
 toggleCartButtons();
+
+submitBookingBtn.addEventListener("click", () => {
+  console.log("Klick!");
+  emptyCart();
+})
