@@ -23,7 +23,7 @@ export default async function home() {
 
     html += `
     <article class="clubCard">
-      <h1>${club.name}</h1>
+        <h1>${club.name}</h1>
       <p>${club.description}</p>
       <div class="clubCardContent">
         <div class="nextClubEvent">

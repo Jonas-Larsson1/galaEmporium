@@ -6,7 +6,7 @@ export default async function club() {
   console.log(result);
   
     return `
-    <main>
+    <main id="club-page">
       <section id="top-section">
         <img src="" alt="Club picture" />
         <aside id="club-info">
