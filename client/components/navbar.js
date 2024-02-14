@@ -6,14 +6,14 @@ const updateNavbar = () => {
         let content = "";
 
         if (data.loggedIn){
-            console.log("Användaren är inloggad")
+            // console.log("Användaren är inloggad")
             content += `
                 <a href="#mypage" id="mypage">Mina Sidor</a>
                 <a href="#cart" id="cart"><i class="fa-solid fa-cart-shopping"></i></a>
                 <button id="logout-btn">Logout</button>
             `
             } else {
-                console.log("Användaren är inloggad", data.loggedIn)
+                // console.log("Användaren är inloggad", data.loggedIn)
                 content = '<button id="login-btn">Logga in</button>'
             }
 
@@ -42,7 +42,7 @@ const updateNavbar = () => {
 
 
             $('#login-btn').click(function() {
-                console.log('clicked')
+                // console.log('clicked')
                 window.location.hash = "#login"
             });
 

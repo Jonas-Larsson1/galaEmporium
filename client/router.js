@@ -9,21 +9,25 @@ import register from "./pages/register.js";
 
 
 // när html-fil är uppladdad
-$( document ).ready(function() {
-  updateNavbar()
-})
+// $( document ).ready(function() {
+//   updateNavbar()
+// })
 import event from "./pages/event.js";
 import { createEvent } from "./pages/event.js";
 
-async function route() {
-  //console.log(location)
 
-  switch (location.hash.replace('#', '')) {
+async function route() {
+  updateNavbar()
+  const hash = location.hash.replace('#', '')
+  const params = hash.split('?')
+  switch (params[0]) {
     case "":
-      $('main').html(home())
+      $('main').html(await home())
       break;
     case "mypage":
-      $('main').html(club())
+      $('main').html(mypage())
+    case "club":
+      $('main').html(await club(params[1]))
       break;
     case "cart":
       $('main').html(cart())

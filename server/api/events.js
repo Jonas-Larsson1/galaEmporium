@@ -24,6 +24,12 @@ export default function event(server) {
     res.json(events)
   })
 
+  server.get('/api/clubEvents/:club_id', async (req, res) => {
+    res.json(await eventModel.find({
+      club_id: req.params.club_id
+    }))
+  })
+
   server.post('/api/event', async (req, res)=> {
     try{
     const newEvent = new eventModel({

@@ -1,19 +1,17 @@
-export default async function club() {
+export default async function club(param) {
 
-  const response = await fetch('/api/clubs/:id')
-  const result = await response.json()
-
-  console.log(result);
+  const response = await fetch(`/api/club/${param}`)
+  const club = await response.json()
   
     return `
-    <main>
+    <main id="club-page">
       <section id="top-section">
         <img src="" alt="Club picture" />
         <aside id="club-info">
-          <h2 id="club-name">${data.name}</h2>
-          <p id="club-description">${data.description}</p>
+          <h2 id="club-name">${club.name}</h2>
+          <p id="club-description">${club.description}</p>
           <ul id="club-owner">
-            Club owners: <li>${data.owners[0]}</li>
+            Club owners: <li>${club.owners}</li>
           </ul>
         </aside>
       </section>
