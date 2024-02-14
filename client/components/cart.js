@@ -4,11 +4,6 @@ import { reservationTimeout, checkIfReservationExpired } from "./reservation-exp
 import { findItemByTitle } from "./process-data-utils.js";
 import { updateCart } from "./update-cart.js";
 
-// access elements in html
-const addToCartBtn = document.querySelector("#add-to-cart-btn");
-const emptyCartBtn = document.querySelector("#empty-cart-btn");
-const cartSummary = document.querySelector("#cart-summary");
-
 // reservation timeout 20 min (in millisec)
 const reservationTimeout = 20 * 60 * 1000;
 
