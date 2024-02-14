@@ -5,7 +5,7 @@ import { findItemByTitle } from "./process-data-utils.js";
 import { updateCart } from "./update-cart.js";
 
 // if anything in session storage, get it
-// if nothing, initialise empty array
+// if nothing, initialise as empty array
 let cartContents = JSON.parse(sessionStorage.getItem("cartContents")) || [];
 
 // for logging when item was last added to cart
@@ -27,7 +27,7 @@ export function toggleCartButtons() {
 }
 
 addToCartBtn.addEventListener("click", () => {
-  let alreadyInCart = findItemByTitle(bookClubTicket.title);
+  let alreadyInCart = findItemByTitle(bookClubTicket.title, cartContents);
 
   // if ticket/s for chosen club already in cart: update object amount only
   if (alreadyInCart) {
@@ -43,8 +43,7 @@ addToCartBtn.addEventListener("click", () => {
 
   // sets time for addition to cart
   timeWhenLastItemWasAdded = new Date().getTime();
-  sessionStorage.setItem("timeWhenLastItemWasAdded", JSON.stringify(timeWhenLastItemWasAdded));
-  console.log("value of timeWhenLastItemWasAdded after being added with 'add to cart' btn ", timeWhenLastItemWasAdded);
+  sessionStorage.setItem("timeWhenLastItemWasAdded", timeWhenLastItemWasAdded);
   updateCart(cartContents);
   toggleCartButtons();
 
