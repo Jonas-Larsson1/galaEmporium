@@ -5,13 +5,16 @@ export default async function event(){
     console.log(result)
 
     let html = ""
+    result.sort((a,b) => {
+        return new Date(a.date) - new Date(b.date)
+    })
 
     for(let data of result){
         console.log(data)
     html+= `
     <div id="event-container">
     <h1>${data.name} </h1>
-    <img src="${data.img}">
+    <img src="${data.img}" id="event-img">
     <h2>${data.club_id.name}</h2>
     <h2>${data.description} </h2> 
     <u><ul>    
