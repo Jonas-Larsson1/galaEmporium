@@ -2,6 +2,14 @@ import { utcToDate, isValidDate } from "../functions/utcToDate.js"
 
 export default async function home() {
 
+  let htmlEvent = `` 
+
+  htmlEvent += `
+  <a href="#events"><h1 class="clubCard"> All upcoming events... </h1></a>
+
+  
+  `
+
   let html = ``
   
   let clubs = await (await fetch('/api/club')).json()
@@ -42,7 +50,8 @@ export default async function home() {
     `
   };
 
-  return `<div id="home">${html}</div>`
+  return `<div id="event-card"> ${htmlEvent}</div>
+  <div id="home">${html}</div> `
 } 
 
 const getClubEvents = async (clubId) => {

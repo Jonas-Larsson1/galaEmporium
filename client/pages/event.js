@@ -1,3 +1,5 @@
+import { utcToDate, isValidDate } from "../functions/utcToDate.js"
+
 export default async function event(){ 
     const response = await fetch ("/api/event")
     const result = await response.json()
@@ -19,7 +21,7 @@ export default async function event(){
     <h2>${data.description} </h2> 
     <u><ul>    
         <li>Cost: ${data.cost}</li> 
-        <li>Date: ${data.date}</li> 
+        <li>Date: ${isValidDate(data.date) ? utcToDate(data.date) : ""}</li> 
    </ul> </u>
    </div>`
     }

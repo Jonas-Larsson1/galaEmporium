@@ -27,6 +27,9 @@ async function route() {
       break;
     case "mypage":
       $('main').html(mypage())
+      case "events":
+        $('main').html(await event())
+        break;
     case "club":
       $('main').html(await club(params[1]))
       break;
