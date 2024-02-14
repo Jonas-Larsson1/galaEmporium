@@ -11,7 +11,20 @@ let cartContents = JSON.parse(sessionStorage.getItem("cartContents")) || [];
 // for logging when item was last added to cart
 let timeWhenLastItemWasAdded = parseInt(sessionStorage.getItem("timeWhenLastItemWasAdded"));
 
+// if page reloads during session, reservation expiration time still counts down
 window.addEventListener("load", checkIfReservationExpired);
+
+export function toggleCartButtons() {
+  // if nothing in cart: empty cart button disabled
+  if (cartContents.length === 0) {
+    emptyCartBtn.disabled = true;
+    submitBookingBtn.disabled = true;
+    cartSummary.textContent = "Your cart is currently empty";
+  } else {
+    emptyCartBtn.disabled = false;
+    submitBookingBtn.disabled = false;
+  }
+}
 
 function checkIfReservationExpired() {
   // if the value of lastItemWasAdded is not null (then cart is not empty)
@@ -64,7 +77,7 @@ addToCartBtn.addEventListener("click", () => {
   sessionStorage.setItem("timeWhenLastItemWasAdded", JSON.stringify(timeWhenLastItemWasAdded));
   console.log("value of timeWhenLastItemWasAdded after being added with 'add to cart' btn ", timeWhenLastItemWasAdded);
   updateCart();
-  checkEmptyCartBtnState();
+  toggleCartButtons();
 
   // set timeout from addition to cart
   setTimeout(checkIfReservationExpired, reservationTimeout);
@@ -82,21 +95,13 @@ function emptyCart() {
   // update session storage
   sessionStorage.setItem("cartContents", JSON.stringify(cartContents));
   updateCart();
-  checkEmptyCartBtnState();
+  toggleCartButtons();
 }
 
-function checkEmptyCartBtnState() {
-  // if nothing in cart: empty cart button disabled
-  if (cartContents.length === 0) {
-    emptyCartBtn.disabled = true;
-    cartSummary.textContent = "Your cart is currently empty";
-  } else {
-    emptyCartBtn.disabled = false;
-  }
-}
+
 
 // check initial state of btn
-checkEmptyCartBtnState();
+toggleCartButtons();
 
 emptyCartBtn.addEventListener("click", () => {
   emptyCart();
@@ -123,7 +128,7 @@ function updateCart() {
       // update timeout from last addition to cart
       setTimeout(checkIfReservationExpired, reservationTimeout);
       updateCart();
-      checkEmptyCartBtnState();
+      toggleCartButtons();
     });
 
     // button to subtract tickets from cart
@@ -143,7 +148,7 @@ function updateCart() {
         }
         updateCart();
         // if amount of item becoming zero also empties the cart, empty cart button will disable here
-        checkEmptyCartBtnState();
+        toggleCartButtons();
       }
     });
     newRow.append(newAddBtn);
@@ -156,4 +161,4 @@ function updateCart() {
 }
 
 updateCart();
-checkEmptyCartBtnState();
+toggleCartButtons();
