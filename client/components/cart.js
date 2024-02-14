@@ -46,6 +46,7 @@ export function toggleCartButtons() {
 }
 
 addToCartBtn.addEventListener("click", () => {
+  // här behövs: id från event i stället för dummy title
   let alreadyInCart = findItemByTitle(bookClubTicket.title, cartContents);
 
   // if ticket/s for chosen club already in cart: update object amount only
@@ -54,6 +55,7 @@ addToCartBtn.addEventListener("click", () => {
   }
   // if ticket/s for chosen club not in cart: add object to array
   else {
+    // här behövs: user id, club id, tickets left
     cartContents.push({
       title: bookClubTicket.title,
       amount: 1
@@ -128,7 +130,11 @@ if (cartContents.length > 0) {
   countdownInterval = setInterval(updateCountdown, 1000);
 }
 
+// här behövs:
+// POST till bookings 
+// PUT till events (minska antalet tillgängliga platser på event)
 submitBookingBtn.addEventListener("click", () => {
+  //submitBooking();
   console.log("Klick!");
   emptyCart();
-})
+});
