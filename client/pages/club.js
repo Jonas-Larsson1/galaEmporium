@@ -1,6 +1,5 @@
 export default async function club(param) {
 
-  console.log(param)
   const response = await fetch(`/api/club/${param}`)
   const club = await response.json()
   

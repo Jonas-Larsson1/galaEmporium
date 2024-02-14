@@ -4,13 +4,13 @@ import login from "./pages/login.js";
 
 async function route() {
   const hash = location.hash.replace('#', '')
-  const param = hash.split('?')[1]
-  switch (hash.split('?')[0]) {
+  const params = hash.split('?')
+  switch (params[0]) {
     case "":
       $('main').html(await home())
       break;
     case "club":
-      $('main').html(await club(param))
+      $('main').html(await club(params[1]))
       break;
     case "login":
       $('main').html(login())
