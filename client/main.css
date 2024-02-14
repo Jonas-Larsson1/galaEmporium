@@ -4,9 +4,16 @@
 }
 
 body {
-  background-color: darkslategrey;
+  background-color: white;
 }
 
 header {
-  background-color: azure;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+}
+
+main{
+  display: flex;
+  justify-content: center;
 }

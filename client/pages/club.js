@@ -25,4 +25,5 @@ export default async function club(param) {
       </section>
     </main>
     `
+    document.querySelector(".main").innerHTML = content;
   }
