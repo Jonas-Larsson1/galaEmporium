@@ -20,7 +20,7 @@ async function route() {
 
   switch (location.hash.replace('#', '')) {
     case "":
-      $('main').html(await event())
+      $('main').html(home())
       break;
     case "mypage":
       $('main').html(club())
