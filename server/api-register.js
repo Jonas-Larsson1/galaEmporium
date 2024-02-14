@@ -5,7 +5,6 @@ import user from "./api/users.js";
 
 export default function (server) {
   club(server)
-  // login(server)
   event(server)
   user(server)
 }
