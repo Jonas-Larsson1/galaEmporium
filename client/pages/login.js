@@ -40,7 +40,7 @@ export default function login() {
     
     if (data.loggedIn) {
       alert('Du är inloggad!');
-      window.location.hash = '#mypage';
+      window.location.hash = '#';
       // updateNavbar();
     } else {
       alert('Gick inte att logga in: fel lösenord eller mailadress.');
