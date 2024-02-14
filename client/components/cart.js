@@ -4,21 +4,12 @@ import { reservationTimeout, checkIfReservationExpired } from "./reservation-exp
 import { findItemByTitle } from "./process-data-utils.js";
 import { updateCart } from "./update-cart.js";
 
-// for logging when item was last added to cart
-//let timeWhenLastItemWasAdded = null;
-//console.log("initial value of lastItemWasAdded ", timeWhenLastItemWasAdded);
-
 // if anything in session storage, get it
 // if nothing, initialise empty array
 let cartContents = JSON.parse(sessionStorage.getItem("cartContents")) || [];
-let timeWhenLastItemWasAdded;
-let sessionStorageTimestamp = sessionStorage.getItem("timeWhenLastItemWasAdded");
 
-// if timestamp in sessionStorage is not null, get it
-// if no timestamp in sessionStorage, initialise null timestamp
-sessionStorageTimestamp ? timeWhenLastItemWasAdded = JSON.parse(sessionStorageTimestamp) : timeWhenLastItemWasAdded = null;
-//let timeWhenLastItemWasAdded = JSON.parse(sessionStorage.getItem("timeWhenLastItemWasAdded"));
-console.log(1, timeWhenLastItemWasAdded);
+// for logging when item was last added to cart
+let timeWhenLastItemWasAdded = parseInt(sessionStorage.getItem("timeWhenLastItemWasAdded"));
 
 window.addEventListener("load", checkIfReservationExpired);
 
