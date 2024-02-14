@@ -61,6 +61,12 @@
 }
 
 #club-page article {
-    height: 8rem;
-    background-color: rgb(187, 187, 187);
+    height: 28rem;
+    background-color: rgb(56, 4, 66);
+    border-radius: 2rem;
+}
+
+.club-img{
+    width:50rem;
+    border-radius:2rem;
 }

@@ -1,7 +1,27 @@
-export default async function club(param) {
 
+
+export default async function club(param) {
   const response = await fetch(`/api/club/${param}`)
   const club = await response.json()
+  const eventResponse = await fetch(`/api/clubEvents/${club._id}`)
+  const clubEvent = await eventResponse.json()
+  let eventData = ""
+  for(let data of clubEvent){
+    console.log(data.name)
+    eventData += 
+    `
+    <article>
+        <img src="${data.img}" class="club-img">
+        <h1>${data.name}</h1>
+        <h2>${data.description}</h2> 
+        <h2>${data.date}</h2>
+
+    </article>
+    `
+  }
+
+  console.log(param)
+  
   
     return `
     <main id="club-page">
@@ -18,9 +38,7 @@ export default async function club(param) {
       <section id="bottom-section">
         <h2 id="events-header">Club events</h2>
         <div id="events-container">
-            <article></article>
-            <article></article>
-            <article></article>
+              ${eventData}
         </div>
       </section>
     </main>
