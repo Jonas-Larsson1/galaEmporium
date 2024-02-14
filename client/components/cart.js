@@ -26,37 +26,6 @@ export function toggleCartButtons() {
   }
 }
 
-function checkIfReservationExpired() {
-  // if the value of lastItemWasAdded is not null (then cart is not empty)
-  console.log("value of timeWhenLastItemWasAdded in checkIfReservationExpired function", timeWhenLastItemWasAdded);
-  if (timeWhenLastItemWasAdded) {
-    const currentTime = new Date().getTime();
-    const timeElapsed = currentTime - timeWhenLastItemWasAdded;
-    if (timeElapsed >= reservationTimeout) {
-      emptyCart();
-      alert("Your reservation has expired");
-    }
-  }
-}
-
-// for checking if there are already ticket/s for a given club in the cart
-function findItemByTitle(title) {
-  return cartContents.find(item => item.title === title)
-}
-
-// DUMMY
-class ClubTicket {
-  constructor(title, price) {
-    this.title = title;
-    this.price = price;
-    this.amount = 0;
-  }
-}
-
-// will need values from events database
-// this is a drill
-let bookClubTicket = new ClubTicket("Book Club Ticket", 100.00);
-
 addToCartBtn.addEventListener("click", () => {
   let alreadyInCart = findItemByTitle(bookClubTicket.title);
 
