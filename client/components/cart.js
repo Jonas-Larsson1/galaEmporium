@@ -45,7 +45,7 @@ addToCartBtn.addEventListener("click", () => {
   timeWhenLastItemWasAdded = new Date().getTime();
   sessionStorage.setItem("timeWhenLastItemWasAdded", JSON.stringify(timeWhenLastItemWasAdded));
   console.log("value of timeWhenLastItemWasAdded after being added with 'add to cart' btn ", timeWhenLastItemWasAdded);
-  updateCart();
+  updateCart(cartContents);
   toggleCartButtons();
 
   // set timeout from addition to cart
@@ -61,7 +61,7 @@ export function emptyCart() {
   sessionStorage.removeItem("timeWhenLastItemWasAdded");
   // update session storage
   sessionStorage.setItem("cartContents", JSON.stringify(cartContents));
-  updateCart();
+  updateCart(cartContents);
   toggleCartButtons();
 }
 
@@ -72,58 +72,5 @@ emptyCartBtn.addEventListener("click", () => {
   emptyCart();
 });
 
-function updateCart() {
-  // empty element if anything is added to cart
-  cartSummary.textContent = "";
-
-  // list added items
-  cartContents.forEach(item => {
-    const newRow = document.createElement("div");
-    newRow.textContent = `${item.title} ${item.amount}`;
-
-    // button to add more tickets to chosen event
-    const newAddBtn = document.createElement("button");
-    newAddBtn.textContent = "+";
-    newAddBtn.addEventListener("click", () => {
-      item.amount++;
-      // update time for last addition to cart
-      timeWhenLastItemWasAdded = new Date().getTime();
-      sessionStorage.setItem("timeWhenLastItemWasAdded", JSON.stringify(timeWhenLastItemWasAdded));
-      console.log("value of timeWhenLastItemWasAdded after clicking add button in cart ", timeWhenLastItemWasAdded)
-      // update timeout from last addition to cart
-      setTimeout(checkIfReservationExpired, reservationTimeout);
-      updateCart();
-      toggleCartButtons();
-    });
-
-    // button to subtract tickets from cart
-    const newSubtractBtn = document.createElement("button");
-    newSubtractBtn.textContent = "–";
-
-    newSubtractBtn.addEventListener("click", () => {
-      // if there are more than zero tickets: subtract
-      if (item.amount > 0) {
-        item.amount--;
-        // if by clicking button amount becomes zero: remove item
-        if (item.amount === 0) {
-          const index = cartContents.indexOf(item);
-          if (index !== -1) {
-            cartContents.splice(index, 1);
-          }
-        }
-        updateCart();
-        // if amount of item becoming zero also empties the cart, empty cart button will disable here
-        toggleCartButtons();
-      }
-    });
-    newRow.append(newAddBtn);
-    newRow.append(newSubtractBtn);
-    cartSummary.append(newRow);
-  });
-
-  // update session storage
-  sessionStorage.setItem("cartContents", JSON.stringify(cartContents));
-}
-
-updateCart();
+updateCart(cartContents);
 toggleCartButtons();
