@@ -25,7 +25,12 @@ export default function user(server) {
     res.json(await userModel.find())
   })
 
-  server.get('/api/login', async (req, res) => {
+  server.get('/api/user/:id', async (req,res)=> {
+    const user = await userModel.findById(req.params.id).populate("club_id")
+    res.json(user)
+  })
+
+   server.get('/api/login', async (req, res) => {
     if (req.session.user) {
       res.status(200).json({
         loggedIn: req.session.user
@@ -74,4 +79,4 @@ export default function user(server) {
     }
   })
 
-}
+} 

@@ -21,19 +21,31 @@ export default async function event(){
     return `<article>${html}</article>`
 }
 
- export function createEvent(){
+ export async function createEvent(){
+   
+    const user = await fetch ("/api/user/65c9e1607fc34c46f1733e94") 
+        const userResult = await user.json()
+        const userClubs = userResult.club_id
+    console.log(userClubs)
+    let club_data = ""
+    for(let club of userClubs){
+        console.log(club)
+        club_data+= `
+        <option value=${club._id}>${club.name}</option> 
+        `
+    }
     return `
         <form onsubmit= "submitEvent(); return false"> 
         <h1> Create Event </h1> 
         <input type="text" name="name" placeholder="Event name">
-        <input type="text" name="image" placeholder="Insert image URL">
+        <input type="text" name="img" placeholder="Insert image URL">
         <label for="club">Choose club: </label>
         <select name="club">
-            <option></option>
-            <option value="SpaceX">SpaceX</option>
+            <option>${club_data}</option>
         </select>  
         <input type="text" name="description" placeholder="Event description">
         <input type="number" name="cost" placeholder="Ticket cost">
+        <input type="number" name="max_attendees" placeholder="Max attendees for party!">
         <input type="date" name="date" placeholder="Date for event"> 
         <input type="submit" value="Publish your event!">
         </form>
@@ -46,10 +58,11 @@ export default async function event(){
    
     const data = {
         name: $(' [name="name"]').val(),
-        image: $(' [name="image"]').val(),
-        club: $(' [name="club"]').val(),
+        img: $(' [name="img"]').val(),
+        club_id: $(' [name="club"]').val(),
         description: $('[name="description"]').val(),
         cost: $(' [name="cost"]').val(),
+        max_attendees: $(' [name="max_attendees"]').val(),
         date: $(' [name="date"]').val()
     }
     console.log(data)
