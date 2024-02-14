@@ -9,11 +9,13 @@ import register from "./pages/register.js";
 
 
 // när html-fil är uppladdad
-$( document ).ready(function() {
-  updateNavbar()
-})
+// $( document ).ready(function() {
+//   updateNavbar()
+// })
+
 
 async function route() {
+  updateNavbar()
   const hash = location.hash.replace('#', '')
   const params = hash.split('?')
   switch (params[0]) {
