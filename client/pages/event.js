@@ -9,14 +9,16 @@ export default async function event(){
     for(let data of result){
         console.log(data)
     html+= `
+    <div id="event-container">
     <h1>${data.name} </h1>
     <img src="${data.img}">
     <h2>${data.club_id.name}</h2>
     <h2>${data.description} </h2> 
-    <ol>    
+    <u><ul>    
         <li>Cost: ${data.cost}</li> 
         <li>Date: ${data.date}</li> 
-   </ol>`
+   </ul> </u>
+   </div>`
     }
     return `<article>${html}</article>`
 }
@@ -46,7 +48,7 @@ export default async function event(){
         <input type="text" name="description" placeholder="Event description">
         <input type="number" name="cost" placeholder="Ticket cost">
         <input type="number" name="max_attendees" placeholder="Max attendees for party!">
-        <input type="date" name="date" placeholder="Date for event"> 
+        <input type="datetime-local" name="date" placeholder="Date for event"> 
         <input type="submit" value="Publish your event!">
         </form>
     `
