@@ -35,6 +35,10 @@ export default function club(server) {
         }
         
         res.json(newUpdatedClub)
+  server.get('/api/club/:id', async (req, res) => {
+    const club = await clubModel.findById(req.params.id)
+    res.json(club)
+  })
 
       } else {
         res.status(400).json({message: "Ingen information skickades"})
