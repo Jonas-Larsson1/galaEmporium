@@ -52,22 +52,18 @@ addToCartBtn.addEventListener("click", () => {
   setTimeout(checkIfReservationExpired, reservationTimeout);
 });
 
-function emptyCart() {
+export function emptyCart() {
   // empty array of cart content
   cartContents.forEach(item => {
     item.amount = 0;
   });
   cartContents = [];
-  timeWhenLastItemWasAdded = null;
-  sessionStorage.setItem("timeWhenLastItemWasAdded", JSON.stringify(timeWhenLastItemWasAdded));
-  console.log("value of timeWhenLastItemWasAdded inside emptyCart function ", timeWhenLastItemWasAdded);
+  sessionStorage.removeItem("timeWhenLastItemWasAdded");
   // update session storage
   sessionStorage.setItem("cartContents", JSON.stringify(cartContents));
   updateCart();
   toggleCartButtons();
 }
-
-
 
 // check initial state of btn
 toggleCartButtons();
