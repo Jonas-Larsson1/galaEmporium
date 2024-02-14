@@ -1,8 +1,10 @@
 import { addToCartBtn, emptyCartBtn, cartSummary, submitBookingBtn } from "./html-elements.js";
 import { bookClubTicket } from "./BookClub.js";
 import { reservationTimeout, checkIfReservationExpired } from "./reservation-expiration.js";
-import { findItemByTitle } from "./process-data-utils.js";
+import { findItemByTitle, countdownSecondsToTwoDigits, countdownMinutesToTwoDigits } from "./process-data-utils.js";
 import { updateCart } from "./update-cart.js";
+
+const countdownDiv = document.querySelector("#countdown");
 
 // if anything in session storage, get it
 // if nothing, initialise as empty array
@@ -11,8 +13,25 @@ let cartContents = JSON.parse(sessionStorage.getItem("cartContents")) || [];
 // for logging when item was last added to cart
 let timeWhenLastItemWasAdded = parseInt(sessionStorage.getItem("timeWhenLastItemWasAdded"));
 
+let countdownInterval;
+
 // if page reloads during session, reservation expiration time still counts down
-window.addEventListener("load", checkIfReservationExpired);
+window.addEventListener("load", () => {
+  checkIfReservationExpired();
+  toggleCartButtons();
+
+  if (timeWhenLastItemWasAdded) {
+    let currentTime = new Date().getTime();
+    let timeElapsed = currentTime - timeWhenLastItemWasAdded;
+    let timeRemaining = Math.max(reservationTimeout - timeElapsed, 0);
+
+    if (timeRemaining > 0) {
+      countdownInterval = setInterval(updateCountdown, 1000);
+    } else {
+      countdownDiv.textContent = "";
+    }
+  }
+});
 
 export function toggleCartButtons() {
   // if nothing in cart: empty cart button disabled
@@ -41,6 +60,8 @@ addToCartBtn.addEventListener("click", () => {
     });
   }
 
+  clearInterval(countdownInterval);
+
   // sets time for addition to cart
   timeWhenLastItemWasAdded = new Date().getTime();
   sessionStorage.setItem("timeWhenLastItemWasAdded", timeWhenLastItemWasAdded);
@@ -49,6 +70,11 @@ addToCartBtn.addEventListener("click", () => {
 
   // set timeout from addition to cart
   setTimeout(checkIfReservationExpired, reservationTimeout);
+
+  // start the countdown timer if it is not already running
+  if (!countdownInterval) {
+    countdownInterval = setInterval(updateCountdown, 1000);
+  }
 });
 
 export function emptyCart() {
@@ -62,6 +88,30 @@ export function emptyCart() {
   sessionStorage.setItem("cartContents", JSON.stringify(cartContents));
   updateCart(cartContents);
   toggleCartButtons();
+  // stop countdown timer
+  clearInterval(countdownInterval);
+  countdownDiv.textContent = "";
+
+  timeWhenLastItemWasAdded = null;
+}
+
+function updateCountdown() {
+  if (timeWhenLastItemWasAdded) {
+    let currentTime = new Date().getTime();
+    let timeElapsed = currentTime - timeWhenLastItemWasAdded;
+    let timeRemaining = Math.max(reservationTimeout - timeElapsed, 0);
+
+    let minutes = Math.floor(timeRemaining / (1000 * 60));
+    let seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+    seconds = countdownSecondsToTwoDigits(seconds);
+    minutes = countdownMinutesToTwoDigits(minutes);
+    countdownDiv.textContent = `Your tickets are reserved for another ${minutes}:${seconds}`;
+
+    if (timeRemaining === 0) {
+      clearInterval(countdownInterval);
+      checkIfReservationExpired();
+    }
+  }
 }
 
 // check initial state of btn
@@ -72,7 +122,11 @@ emptyCartBtn.addEventListener("click", () => {
 });
 
 updateCart(cartContents);
-toggleCartButtons();
+//toggleCartButtons();
+
+if (cartContents.length > 0) {
+  countdownInterval = setInterval(updateCountdown, 1000);
+}
 
 submitBookingBtn.addEventListener("click", () => {
   console.log("Klick!");

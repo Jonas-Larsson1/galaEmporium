@@ -2,7 +2,7 @@ import { emptyCart } from "./cart.js";
 
 // reservation timeout 20 min (in millisec)
 // short timeout for trial – CHANGE LATER!
-export const reservationTimeout = 0.1 * 60 * 1000;
+export const reservationTimeout = 20 * 60 * 1000;
 
 export function checkIfReservationExpired() {
 
