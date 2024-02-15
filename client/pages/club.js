@@ -1,17 +1,26 @@
 
-
 export default async function club(param) {
   const response = await fetch(`/api/club/${param}`)
   const club = await response.json()
+  const ownerResponse = await fetch(`/api/club/${param}/users`)
+  const clubOwners = await ownerResponse.json()
   const eventResponse = await fetch(`/api/clubEvents/${club._id}`)
   const clubEvent = await eventResponse.json()
+  let ownerData = ""
+  for(let data of clubOwners) {
+    ownerData +=
+    `
+    <li>${data}</li>
+    `
+  }
+
   let eventData = ""
   for(let data of clubEvent){
     console.log(data.name)
     eventData += 
     `
     <article>
-        <img src="${data.img}" class="club-img">
+        <img src="${data.img}" class="event-image">
         <h1>${data.name}</h1>
         <h2>${data.description}</h2> 
         <h2>${data.date}</h2>
@@ -26,13 +35,11 @@ export default async function club(param) {
     return `
     <main id="club-page">
       <section id="top-section">
-        <img src="" alt="Club picture" />
+        <img src="${club.image}" alt="Club picture" />
         <aside id="club-info">
           <h2 id="club-name">${club.name}</h2>
           <p id="club-description">${club.description}</p>
-          <ul id="club-owner">
-            Club owners: <li>${club.owners}</li>
-          </ul>
+          <ul id="club-owner">Club owners: ${ownerData}</ul>
         </aside>
       </section>
       <section id="bottom-section">

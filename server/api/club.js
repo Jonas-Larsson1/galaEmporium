@@ -3,8 +3,9 @@ import mongoose from "mongoose"
 const clubSchema = mongoose.Schema({
   name: String,
   description: String,
-  image: String
-})
+  image: String,
+  owners: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }]
+});
 
 const clubModel = mongoose.model('clubs', clubSchema)
 
@@ -12,6 +13,21 @@ export default function club(server) {
 
   server.get('/api/club', async (req, res) => {
     res.json(await clubModel.find())
+  })
+
+  server.get('/api/club/:id', async (req, res) => {
+    const club = await clubModel.findById(req.params.id)
+    res.json(club)
+  })
+
+  server.get('/api/club/:id/users', async (req, res) => {
+    try {
+      const club = await clubModel.findById(req.params.id).populate('owners');
+      const ownerNames = club.owners.map(user => user.name);
+      res.json(ownerNames);
+    } catch (error) {
+      res.status(500).json({ error: 'An error occurred' });
+    }
   })
 
   server.put('/api/club/:id', async(req, res) => {
@@ -46,9 +62,4 @@ export default function club(server) {
     }
   })
 
-  server.get('/api/club/:id', async (req, res) => {
-    const club = await clubModel.findById(req.params.id)
-    res.json(club)
-  })
-  
 }

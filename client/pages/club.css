@@ -39,6 +39,7 @@
     display: flex;
     flex-direction: row;
     font-weight: bold;
+    padding: 0;
 }
 
 #club-owner li {
@@ -61,12 +62,14 @@
 }
 
 #club-page article {
-    height: 28rem;
+    height: 30rem;
     background-color: rgb(56, 4, 66);
+    color: white;
     border-radius: 2rem;
 }
 
-.club-img{
-    width:50rem;
-    border-radius:2rem;
+.event-image{
+    width: calc(100% - 2rem);
+    margin: 1rem;
+    border-radius: 2rem;
 }
