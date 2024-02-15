@@ -6,6 +6,7 @@ import updateNavbar from "./components/navbar.js"
 import register from "./pages/register.js";
 import event from "./pages/event.js";
 import { createEvent } from "./pages/event.js";
+import mypage from "./components/mypage.js";
 
 // cart();
 
@@ -25,8 +26,9 @@ async function route() {
     case "":
       $('main').html(await home())
       break;
-    // case "mypage":
-    //   $('main').html(mypage())
+    case "mypage":
+     $('main').html(await mypage())
+     break;
     case "events":
       $('main').html(await event())
       break;
