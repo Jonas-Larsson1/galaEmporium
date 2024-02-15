@@ -1,0 +1,28 @@
+
+.container{
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    border: 2px solid black;
+    margin: 10px;
+    
+}
+
+#container-xl{
+    border: 2px solid pink;
+    width: 90%;
+    margin: 20px;
+}
+
+.paid {
+    background-color: lightgray; 
+  }
+  
+  .pay {
+    background-color: red; 
+    color: white; 
+  }
+
+.pay:hover{
+    cursor: pointer;
+}
+  

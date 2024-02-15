@@ -27,7 +27,7 @@ async function route() {
       $('main').html(await home())
       break;
     case "mypage":
-     $('main').html(await mypage())
+      $('main').html(await mypage())
      break;
     case "events":
       $('main').html(await event())
@@ -44,9 +44,9 @@ async function route() {
     case "login":
       $('main').html(await login())
       break;
-    case "cart":
-      $('main').html(cart())
-      break;
+    // case "cart":
+    //   $('main').html(cart())
+    //   break;
     default:
       console.log("404 You've broken the internet")
   }
