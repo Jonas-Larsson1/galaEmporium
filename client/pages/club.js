@@ -18,7 +18,7 @@ export default async function club(param) {
 
     </article>
     `
-  }
+  } 
 
   console.log(param)
   

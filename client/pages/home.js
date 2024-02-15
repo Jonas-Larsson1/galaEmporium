@@ -8,9 +8,9 @@ export default async function home() {
   <a href="#events"><h1 class="clubCard"> All upcoming events... </h1></a>
 
   
-  `
+  ` 
 
-  let html = ``
+  let html = `` 
   
   let clubs = await (await fetch('/api/club')).json()
 
