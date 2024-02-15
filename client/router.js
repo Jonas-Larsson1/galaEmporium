@@ -2,7 +2,7 @@ import home from "./pages/home.js";
 import club from "./pages/club.js";
 import login from "./pages/login.js";
 /* import cart from "./components/cart.js" */
-import updateNavbar from "./components/navbar.js"
+import updateNavbar from "./components/navbar.js";
 import register from "./pages/register.js";
 import event from "./pages/event.js";
 import { createEvent } from "./pages/event.js";

@@ -1,5 +1,5 @@
 import { utcToDate, isValidDate } from "../functions/utcToDate.js"
-import { addToCart } from "../components/cart.js"
+ import { addToCart } from "../components/cart.js"
 export default async function event(){ 
     const response = await fetch ("/api/event")
     const result = await response.json()
@@ -23,13 +23,13 @@ export default async function event(){
     <u><ul>    
         <li>Cost: ${data.cost}</li> 
         <li>Date: ${isValidDate(data.date) ? utcToDate(data.date) : ""}</li> 
-        <button id="test">Add to cart</button>
+        <button onclick="addToCart(${data})" id="test">Add to cart</button>
    </ul> </u>
    </div>`
     }
 
     // $('#test').on('click', addToCart)
-    $(document).on('click', '#test', addToCart);
+    // $(document).on('click', '#test', addToCart);
     return `
     <article>${html}</article>`
 

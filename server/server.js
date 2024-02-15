@@ -4,7 +4,7 @@ import apiRegister from "./api-register.js"
 import session from "express-session"
 
 const server = express()
-const port = 3000
+const port = 3001
 
 server.use(session({
   secret: 'var_hemliga_tangent',

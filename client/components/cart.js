@@ -4,7 +4,7 @@ import { findItemByTitle, countdownSecondsToTwoDigits, countdownMinutesToTwoDigi
 import { updateCart } from "./update-cart.js";
 
 
-const countdownDiv = document.querySelector("#countdown");
+// const countdownDiv = document.querySelector("#countdown");
 
 // if anything in session storage, get it
 // if nothing, initialise as empty array
@@ -48,26 +48,31 @@ let countdownInterval;
 
 
 
-export function addToCart() {
+export function addToCart(event) {
   console.log('hej')
 
   // här behövs: id från event i stället för dummy title
   // let alreadyInCart = findItemByTitle(bookClubTicket.title, cartContents);
+  // let dataContainer = document.createElement("div")
+
+  
   let alreadyInCart = 0;
 
-  // if ticket/s for chosen club already in cart: update object amount only
-  if (alreadyInCart) {
-    alreadyInCart.amount++;
-  }
-  // if ticket/s for chosen club not in cart: add object to array
-  else {
+  // // if ticket/s for chosen club already in cart: update object amount only
+  // if (alreadyInCart) {
+  //   alreadyInCart.amount++;
+  // }
+  // // if ticket/s for chosen club not in cart: add object to array
+  // else {
     // här behövs: user id, club id, tickets left
     // cartContents.push({
     //   title: bookClubTicket.title,
     //   amount: 1
     // });
     cartContents.push({
-      title: "test",
+      title: event.name,
+      event_id: event._id,
+      cost: event.cost,
       amount: 1
     });
   }
@@ -87,7 +92,7 @@ export function addToCart() {
   if (!countdownInterval) {
     countdownInterval = setInterval(updateCountdown, 1000);
   }
-};
+//};
 
 
 export function emptyCart() {
@@ -103,7 +108,7 @@ export function emptyCart() {
   toggleCartButtons();
   // stop countdown timer
   clearInterval(countdownInterval);
-  countdownDiv.textContent = "";
+  // countdownDiv.textContent = "";
 
   timeWhenLastItemWasAdded = null;
 }
@@ -118,7 +123,7 @@ function updateCountdown() {
     let seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
     seconds = countdownSecondsToTwoDigits(seconds);
     minutes = countdownMinutesToTwoDigits(minutes);
-    countdownDiv.textContent = `Your tickets are reserved for another ${minutes}:${seconds}`;
+    // countdownDiv.textContent = `Your tickets are reserved for another ${minutes}:${seconds}`;
 
     if (timeRemaining === 0) {
       clearInterval(countdownInterval);
