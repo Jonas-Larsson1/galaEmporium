@@ -1,18 +1,19 @@
 import { utcToDate, isValidDate } from "../functions/utcToDate.js"
-
+import { addToCart } from "../components/cart.js"
 export default async function event(){ 
     const response = await fetch ("/api/event")
     const result = await response.json()
 
-    console.log(result)
+    // console.log(result)
 
+   
     let html = ""
     result.sort((a,b) => {
         return new Date(a.date) - new Date(b.date)
     })
 
     for(let data of result){
-        console.log(data)
+        // console.log(data)
     html+= `
     <div id="event-container">
     <h1>${data.name} </h1>
@@ -22,10 +23,16 @@ export default async function event(){
     <u><ul>    
         <li>Cost: ${data.cost}</li> 
         <li>Date: ${isValidDate(data.date) ? utcToDate(data.date) : ""}</li> 
+        <button id="test">Add to cart</button>
    </ul> </u>
    </div>`
     }
-    return `<article>${html}</article>`
+
+    // $('#test').on('click', addToCart)
+    $(document).on('click', '#test', addToCart);
+    return `
+    <article>${html}</article>`
+
 }
 
  export async function createEvent(){
@@ -33,10 +40,10 @@ export default async function event(){
     const user = await fetch ("/api/user/65c9e1607fc34c46f1733e94") 
         const userResult = await user.json()
         const userClubs = userResult.club_id
-    console.log(userClubs)
+    // console.log(userClubs)
     let club_data = ""
     for(let club of userClubs){
-        console.log(club)
+        // console.log(club)
         club_data+= `
         <option value=${club._id}>${club.name}</option> 
         `
@@ -61,7 +68,7 @@ export default async function event(){
 
   async function submitEvent(){
     
-    console.log("submitted")
+    // console.log("submitted")
    
     const data = {
         name: $(' [name="name"]').val(),
@@ -72,7 +79,7 @@ export default async function event(){
         max_attendees: $(' [name="max_attendees"]').val(),
         date: $(' [name="date"]').val()
     }
-    console.log(data)
+    // console.log(data)
     const result = await fetch('api/event', {
         method: 'post',
         headers: {
@@ -80,7 +87,7 @@ export default async function event(){
         },
         body: JSON.stringify(data)
     })
-    console.log('result', result)
+    // console.log('result', result)
    
 }
 

@@ -1,7 +1,7 @@
-import { cartSummary } from "./html-elements.js";
+// import { cartSummary } from "./html-elements.js";
 import { emptyCart } from "./cart.js";
 import { checkIfReservationExpired, reservationTimeout } from "./reservation-expiration.js";
-import { toggleCartButtons } from "./cart.js";
+// import { toggleCartButtons } from "./cart.js";
 
 export function updateCart(cartContents) {
   // empty element if anything is added to cart

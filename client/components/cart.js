@@ -1,8 +1,8 @@
-import { addToCartBtn, emptyCartBtn, cartSummary, submitBookingBtn } from "./html-elements.js";
-import { bookClubTicket } from "./BookClub.js";
+// import { cartSummary, submitBookingBtn } from "./html-elements.js"; 
 import { reservationTimeout, checkIfReservationExpired } from "./reservation-expiration.js";
 import { findItemByTitle, countdownSecondsToTwoDigits, countdownMinutesToTwoDigits } from "./process-data-utils.js";
 import { updateCart } from "./update-cart.js";
+
 
 const countdownDiv = document.querySelector("#countdown");
 
@@ -16,38 +16,44 @@ let timeWhenLastItemWasAdded = parseInt(sessionStorage.getItem("timeWhenLastItem
 let countdownInterval;
 
 // if page reloads during session, reservation expiration time still counts down
-window.addEventListener("load", () => {
-  checkIfReservationExpired();
-  toggleCartButtons();
+// window.addEventListener("load", () => {
+//   checkIfReservationExpired();
+//   toggleCartButtons();
 
-  if (timeWhenLastItemWasAdded) {
-    let currentTime = new Date().getTime();
-    let timeElapsed = currentTime - timeWhenLastItemWasAdded;
-    let timeRemaining = Math.max(reservationTimeout - timeElapsed, 0);
+//   if (timeWhenLastItemWasAdded) {
+//     let currentTime = new Date().getTime();
+//     let timeElapsed = currentTime - timeWhenLastItemWasAdded;
+//     let timeRemaining = Math.max(reservationTimeout - timeElapsed, 0);
 
-    if (timeRemaining > 0) {
-      countdownInterval = setInterval(updateCountdown, 1000);
-    } else {
-      countdownDiv.textContent = "";
-    }
-  }
-});
+//     if (timeRemaining > 0) {
+//       countdownInterval = setInterval(updateCountdown, 1000);
+//     } else {
+//       countdownDiv.textContent = "";
+//     }
+//   }
+// });
 
-export function toggleCartButtons() {
-  // if nothing in cart: empty cart button disabled
-  if (cartContents.length === 0) {
-    emptyCartBtn.disabled = true;
-    submitBookingBtn.disabled = true;
-    cartSummary.textContent = "Your cart is currently empty";
-  } else {
-    emptyCartBtn.disabled = false;
-    submitBookingBtn.disabled = false;
-  }
-}
+// export function toggleCartButtons() {
+//   // if nothing in cart: empty cart button disabled
+//   if (cartContents.length === 0) {
+//     emptyCartBtn.disabled = true;
+//     submitBookingBtn.disabled = true;
+//     cartSummary.textContent = "Your cart is currently empty";
+//   } else {
+//     emptyCartBtn.disabled = false;
+//     submitBookingBtn.disabled = false;
+//   }
+// }
 
-addToCartBtn.addEventListener("click", () => {
+
+
+
+export function addToCart() {
+  console.log('hej')
+
   // här behövs: id från event i stället för dummy title
-  let alreadyInCart = findItemByTitle(bookClubTicket.title, cartContents);
+  // let alreadyInCart = findItemByTitle(bookClubTicket.title, cartContents);
+  let alreadyInCart = 0;
 
   // if ticket/s for chosen club already in cart: update object amount only
   if (alreadyInCart) {
@@ -56,8 +62,12 @@ addToCartBtn.addEventListener("click", () => {
   // if ticket/s for chosen club not in cart: add object to array
   else {
     // här behövs: user id, club id, tickets left
+    // cartContents.push({
+    //   title: bookClubTicket.title,
+    //   amount: 1
+    // });
     cartContents.push({
-      title: bookClubTicket.title,
+      title: "test",
       amount: 1
     });
   }
@@ -67,8 +77,8 @@ addToCartBtn.addEventListener("click", () => {
   // sets time for addition to cart
   timeWhenLastItemWasAdded = new Date().getTime();
   sessionStorage.setItem("timeWhenLastItemWasAdded", timeWhenLastItemWasAdded);
-  updateCart(cartContents);
-  toggleCartButtons();
+  // updateCart(cartContents);
+  // toggleCartButtons();
 
   // set timeout from addition to cart
   setTimeout(checkIfReservationExpired, reservationTimeout);
@@ -77,7 +87,8 @@ addToCartBtn.addEventListener("click", () => {
   if (!countdownInterval) {
     countdownInterval = setInterval(updateCountdown, 1000);
   }
-});
+};
+
 
 export function emptyCart() {
   // empty array of cart content
@@ -117,24 +128,24 @@ function updateCountdown() {
 }
 
 // check initial state of btn
-toggleCartButtons();
+// toggleCartButtons();
 
-emptyCartBtn.addEventListener("click", () => {
-  emptyCart();
-});
+// emptyCartBtn.addEventListener("click", () => {
+//   emptyCart();
+// });
 
-updateCart(cartContents);
-//toggleCartButtons();
+// updateCart(cartContents);
+// //toggleCartButtons();
 
-if (cartContents.length > 0) {
-  countdownInterval = setInterval(updateCountdown, 1000);
-}
+// if (cartContents.length > 0) {
+//   countdownInterval = setInterval(updateCountdown, 1000);
+// }
 
-// här behövs:
-// POST till bookings 
-// PUT till events (minska antalet tillgängliga platser på event)
-submitBookingBtn.addEventListener("click", () => {
-  //submitBooking();
-  console.log("Klick!");
-  emptyCart();
-});
+// // här behövs:
+// // POST till bookings 
+// // PUT till events (minska antalet tillgängliga platser på event)
+// submitBookingBtn.addEventListener("click", () => {
+//   //submitBooking();
+//   console.log("Klick!");
+//   emptyCart();
+// });

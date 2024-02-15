@@ -7,7 +7,7 @@ export default async function club(param) {
   const clubEvent = await eventResponse.json()
   let eventData = ""
   for(let data of clubEvent){
-    console.log(data.name)
+    // console.log(data.name)
     eventData += 
     `
     <article>
@@ -20,7 +20,7 @@ export default async function club(param) {
     `
   }
 
-  console.log(param)
+  // console.log(param)
   
   
     return `
