@@ -1,0 +1,72 @@
+#club-page {
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+#top-section {
+    display: grid;
+    height: 20rem;
+    grid-template-columns: auto 1fr;
+    column-gap: 1rem;
+    margin: 0.5rem;
+}
+
+#club-page img {
+    height: 20rem;
+    max-width: auto;
+}
+
+#club-info {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    row-gap: 0.5rem;
+}
+
+#club-page h2 {
+    justify-self: center;
+    text-decoration: underline;
+}
+
+#club-name {
+
+}
+
+#club-description {
+
+}
+
+#club-owner {
+    display: flex;
+    flex-direction: row;
+    font-weight: bold;
+}
+
+#club-owner li {
+    list-style: none;
+    font-weight: normal;
+    margin-left: 0.5rem;
+}
+
+#bottom-section {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    row-gap: 1rem;
+    margin: 0.5rem;
+}
+
+#events-container {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 0.5rem;
+}
+
+#club-page article {
+    height: 28rem;
+    background-color: rgb(56, 4, 66);
+    border-radius: 2rem;
+}
+
+.club-img{
+    width:50rem;
+    border-radius:2rem;
+}

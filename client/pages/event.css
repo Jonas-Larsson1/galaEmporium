@@ -1,0 +1,22 @@
+
+#event-img{
+    width: 40rem;
+    height:20rem;
+    border-radius: 10%;
+}
+
+article{
+    margin-bottom: 5rem;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#event-container{
+    border-bottom: 0.5rem solid black;
+    border-radius: 1%;
+}
+
+h1{
+    text-align: center;
+}
