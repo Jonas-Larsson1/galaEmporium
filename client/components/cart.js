@@ -49,6 +49,7 @@ addToCartBtn.addEventListener("click", () => {
   // här behövs: id från event i stället för dummy title
   let alreadyInCart = findItemByTitle(bookClubTicket.title, cartContents);
 
+  // här behövs: tickets left minska
   // if ticket/s for chosen club already in cart: update object amount only
   if (alreadyInCart) {
     alreadyInCart.amount++;
@@ -58,7 +59,7 @@ addToCartBtn.addEventListener("click", () => {
     // här behövs: user id, club id, tickets left
     cartContents.push({
       title: bookClubTicket.title,
-      amount: 1
+      amount: 1 //default when first adding to cart: not an option to chose amount of tickets before hitting "add to cart" button
     });
   }
 
