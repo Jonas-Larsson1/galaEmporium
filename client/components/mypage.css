@@ -1,24 +1,38 @@
 
 .container{
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: repeat(6, 1fr);
     border: 2px solid black;
-    margin: 10px;
-    
+    border-radius: 10px;
+    margin: 10px;  
+    justify-items: center;
+    align-items: center;
 }
 
 #container-xl{
-    border: 2px solid pink;
+    /* border: 2px solid pink; */
     width: 90%;
     margin: 20px;
 }
 
+.container_img{
+    width: 100px;
+    height: 80%;
+    padding: 5px;
+}
+
+.container-button{
+    width: 100px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
 .paid {
     background-color: lightgray; 
   }
   
   .pay {
-    background-color: red; 
+    background-color: blue; 
     color: white; 
   }
 
