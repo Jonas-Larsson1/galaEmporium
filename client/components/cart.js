@@ -49,7 +49,7 @@ let countdownInterval;
 
 
 export function addToCart(event) {
-  console.log('hej')
+  console.log(event)
 
   // här behövs: id från event i stället för dummy title
   // let alreadyInCart = findItemByTitle(bookClubTicket.title, cartContents);
@@ -72,9 +72,10 @@ export function addToCart(event) {
     cartContents.push({
       title: event.name,
       event_id: event._id,
-      cost: event.cost,
       amount: 1
     });
+
+    sessionStorage.setItem("cartContents", JSON.stringify(cartContents));
   }
 
   clearInterval(countdownInterval);
