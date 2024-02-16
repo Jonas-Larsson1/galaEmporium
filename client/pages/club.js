@@ -29,6 +29,27 @@ export default async function club(param) {
     `
   }
 
+  // if(club.owners.includes(req.session.user)) {
+  //   //Edit function
+  //   window.alert("You are a club owner!")
+  // } else {
+  //   window.alert("You are NOT a club owner!")
+  // }
+
+  // if(req.session.user = club.owners) {
+  //   window.alert("Wow!")
+  // }
+
+  // let clubData = club.owners;
+  // for(let data of clubData) {
+  //   console.log(req.session.user, data)
+  //   if(req.session.user = data) {
+  //     if(window.confirm("Click confirm to edit page")) {
+
+  //     }
+  //   }
+  // }
+
   console.log(param)
   
   
