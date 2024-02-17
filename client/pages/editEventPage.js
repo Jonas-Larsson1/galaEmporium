@@ -76,11 +76,14 @@ async function updateEvent(eventId, method){
         description: $('[name="description"]').val(),
         cost: $('[name="cost"]').val(),
         date: $('[name="date"]').val(),
+        max_attendees: $('name="max_attendees"').val(),
+        club_id: $('name="club"').val(),
         img: $('[name="img"]').val(),
     }
 
+    let event
     if (method === 'put') {
-        const thisEvent = await fetch(`/api/event/${eventId}`, {
+        event = await fetch(`/api/event/${eventId}`, {
             method: "put" ,
             headers: {
                 'Content-type': 'application/json'
@@ -88,7 +91,7 @@ async function updateEvent(eventId, method){
             body: JSON.stringify(updatedData)
         })
     } else {
-        const thisEvent = await fetch(`/api/event`, {
+        event = await fetch(`/api/event`, {
             method: "post" ,
             headers: {
                 'Content-type': 'application/json'
@@ -96,7 +99,7 @@ async function updateEvent(eventId, method){
             body: JSON.stringify(updatedData)
         })
     }
-    const res = await thisEvent.json()
+    // const res = await event.json()
     // console.log(res)
 } 
     
