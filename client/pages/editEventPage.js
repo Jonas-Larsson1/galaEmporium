@@ -1,5 +1,7 @@
 export default async function editEventPage(eventId){
     const event = await (await fetch(`/api/event/${eventId}`)).json()
+    const eventDate = new Date(event.date)
+    const formattedEventDate = eventDate.toISOString().slice(0, 16)
 
     return `
     <form id="editEventForm">
@@ -13,7 +15,7 @@ export default async function editEventPage(eventId){
         <input type="number" id="cost" name="cost" value="${event.cost}"><br>
 
         <label for="date">Change date</label><br>
-        <input type="datetime-local" id="date" name="date" value="${event.date}"><br>
+        <input type="datetime-local" id="date" name="date" value="${formattedEventDate}"><br>
 
         <label for="img">Change image</label><br>
         <input type="text" id="img" name="img" value="${event.img}"><br>
