@@ -4,8 +4,7 @@ import login from "./pages/login.js";
 /* import cart from "./components/cart.js" */
 import updateNavbar from "./components/navbar.js";
 import register from "./pages/register.js";
-import event from "./pages/event.js";
-import showEvents, { createEvent } from "./pages/event.js";
+import showEvents from "./pages/event.js";
 import editEventPage from "./pages/editEventPage.js";
 
 // cart();

@@ -32,18 +32,21 @@ export default function event(server) {
 
   server.post('/api/event', async (req, res)=> {
     try {
-    const newEvent = new eventModel({
-      name: req.body.name,
-      description: req.body.description,
-      date: req.body.date,
-      cost:req.body.cost,
-      max_attendees: req.body.max_attendees,
-      club_id: req.body.club_id,
-      img: req.body.img, //Kommer inte att laddas upp som bild... 
-      tickets_left:req.body.tickets_left 
-    })
-    const result = await newEvent.save()
-    res.json(result)
+      if (!eventToUpdate.club_id.owners.includes(req.session.user)) {
+        return res.status(401).json({ message: "You are not a registered club owner." });
+      } else { 
+        const newEvent = new eventModel({
+          name: req.body.name,
+          description: req.body.description,
+          date: req.body.date,
+          cost:req.body.cost,
+          max_attendees: req.body.max_attendees,
+          club_id: req.body.club_id,
+          img: req.body.img, //Kommer inte att laddas upp som bild... 
+        })
+      const result = await newEvent.save()
+      res.json(result)
+    }
     } catch(error){
         res.json({message: "404: Could not post event", error})
     }

@@ -1,5 +1,6 @@
 // import { utcToDate, isValidDate } from "../functions/utcToDate.js"
 import showEvents from "./event.js"
+import { isClubOwner } from "../functions/general.js"
 export default async function club(clubId) {
   const response = await fetch(`/api/club/${clubId}`)
   const club = await response.json()
@@ -48,6 +49,9 @@ export default async function club(clubId) {
       <section id="bottom-section">
         <h2 id="events-header">Club events</h2>
         <div id="events-container">
+            <a href ="#editEventPage" class="material-symbols-outlined">
+              ${await isClubOwner(club._id) ? "Create new event" : ""} 
+            </a>
               ${eventData}
         </div>
       </section>
