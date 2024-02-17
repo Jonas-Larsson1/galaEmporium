@@ -1,4 +1,5 @@
-import { utcToDate, isValidDate } from "../functions/utcToDate.js"
+// import { utcToDate, isValidDate } from "../functions/utcToDate.js"
+import showEvents from "./event.js"
 export default async function club(clubId) {
   const response = await fetch(`/api/club/${clubId}`)
   const club = await response.json()
@@ -14,20 +15,22 @@ export default async function club(clubId) {
     `
   }
 
-  let eventData = ""
-  for(let data of clubEvent){
-    // console.log(data.name)
-    eventData += 
-    `
-    <article>
-        <img src="${data.img}" class="event-image">
-        <h1>${data.name}</h1>
-        <h2>${data.description}</h2> 
-        <h2>${isValidDate(data.date) ? utcToDate(data.date) : ""}</h2>
+  // let eventData = ""
+  // for(let data of clubEvent){
+  //   // console.log(data.name)
+  //   eventData += 
+  //   `
+  //   <article>
+  //       <img src="${data.img}" class="event-image">
+  //       <h1>${data.name}</h1>
+  //       <h2>${data.description}</h2> 
+  //       <h2>${isValidDate(data.date) ? utcToDate(data.date) : ""}</h2>
 
-    </article>
-    `
-  }
+  //   </article>
+  //   `
+  // }
+
+  const eventData = await showEvents(clubId)
 
   // console.log(param)
   

@@ -2,9 +2,14 @@ import { utcToDate, isValidDate } from "../functions/utcToDate.js"
 import { addToCart } from "../components/cart.js"
 
 let events = []
-export default async function event(){ 
-    const response = await fetch ("/api/event")
-    events = await response.json()
+export default async function showEvents(clubId){
+    
+    if (!clubId) {
+        const response = await fetch ("/api/event")
+        events = await response.json()
+    } else {
+        events = await (await fetch(`/api/clubEvents/${clubId}`)).json()
+    }
 
     const currentUser = await (await fetch('/api/login')).json()
     // console.log(events)
@@ -17,9 +22,6 @@ export default async function event(){
     })
 
     const isClubOwner = (userId, club) => {
-        // console.log(userId)
-        // console.log(club.owners)
-        console.log(club.owners.includes(userId))
         return club.owners.includes(userId)
     }
 

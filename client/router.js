@@ -5,7 +5,7 @@ import login from "./pages/login.js";
 import updateNavbar from "./components/navbar.js";
 import register from "./pages/register.js";
 import event from "./pages/event.js";
-import { createEvent } from "./pages/event.js";
+import showEvents, { createEvent } from "./pages/event.js";
 import editEventPage from "./pages/editEventPage.js";
 
 // cart();
@@ -29,7 +29,7 @@ async function route() {
     // case "mypage":
     //   $('main').html(mypage())
     case "events":
-      $('main').html(await event())
+      $('main').html(await showEvents())
       break;
     case "editEventPage":
       $('main').html(await editEventPage(params[1]))

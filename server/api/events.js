@@ -27,7 +27,7 @@ export default function event(server) {
   server.get('/api/clubEvents/:club_id', async (req, res) => {
     res.json(await eventModel.find({
       club_id: req.params.club_id
-    }))
+    }).populate("club_id"))
   })
 
   server.post('/api/event', async (req, res)=> {
