@@ -6,6 +6,7 @@ import updateNavbar from "./components/navbar.js";
 import register from "./pages/register.js";
 import event from "./pages/event.js";
 import { createEvent } from "./pages/event.js";
+import editEventPage from "./pages/editEventPage.js";
 
 // cart();
 
@@ -30,6 +31,8 @@ async function route() {
     case "events":
       $('main').html(await event())
       break;
+    case "editEventPage":
+      $('main').html(await editEventPage(params[1]))
     case "club":
       $('main').html(await club(params[1]))
       break;

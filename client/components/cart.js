@@ -90,9 +90,9 @@ export function addToCart(event) {
   setTimeout(checkIfReservationExpired, reservationTimeout);
 
   // start the countdown timer if it is not already running
-  if (!countdownInterval) {
-    countdownInterval = setInterval(updateCountdown, 1000);
-  }
+  // if (!countdownInterval) {
+  //   countdownInterval = setInterval(updateCountdown, 1000);
+  // }
 //};
 
 

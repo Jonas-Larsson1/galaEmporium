@@ -1,4 +1,4 @@
-
+import { utcToDate, isValidDate } from "../functions/utcToDate.js"
 export default async function club(param) {
   const response = await fetch(`/api/club/${param}`)
   const club = await response.json()
@@ -23,7 +23,7 @@ export default async function club(param) {
         <img src="${data.img}" class="event-image">
         <h1>${data.name}</h1>
         <h2>${data.description}</h2> 
-        <h2>${data.date}</h2>
+        <h2>${isValidDate(data.date) ? utcToDate(data.date) : ""}</h2>
 
     </article>
     `
@@ -50,5 +50,4 @@ export default async function club(param) {
       </section>
     </main>
     `
-    document.querySelector(".main").innerHTML = content;
   }

@@ -1,36 +1,36 @@
-
 import { utcToDate, isValidDate } from "../functions/utcToDate.js"
- import { addToCart } from "../components/cart.js"
- let result = []
+import { addToCart } from "../components/cart.js"
+
+let result = []
 export default async function event(){ 
     const response = await fetch ("/api/event")
-      result = await response.json()
+    result = await response.json()
 
     // console.log(result)
-
    
     let html = ""
     result.sort((a,b) => {
         return new Date(a.date) - new Date(b.date)
     })
 
-
     for(let [index,data] of result.entries()){
-     
-    html+= `
-    <div id="event-container">
-    <h1>${data.name} </h1>
-    <img src="${data.img}" id="event-img">
-    <h2>${data.club_id.name}</h2>
-    <h2>${data.description} </h2> 
-    <u><ul>    
-        <li>Cost: ${data.cost}</li> 
-        <li>Date: ${isValidDate(data.date) ? utcToDate(data.date) : ""}</li> 
-        <button onclick= "findEvent(${index});" id="test">Add to cart</button>
-   </ul> </u>
-   </div>`
-    }
+        html+= `
+        <div id="event-container">
+            <h1>${data.name} </h1>
+            <a href ="#editEventPage?${data._id}" class="material-symbols-outlined">Click me to edit</a>
+            <img src="${data.img}" id="event-img">
+            <h2>${data.club_id.name}</h2>
+            <h2>${data.description} </h2> 
+            <u>
+                <ul>    
+                    <li>Cost: ${data.cost}</li> 
+                    <li>Date: ${isValidDate(data.date) ? utcToDate(data.date) : ""}</li> 
+                    <button onclick= "findEvent(${index});" id="test">Add to cart</button>
+                </ul>
+            </u>
+        </div>`
 
+    }
     // $('#test').on('click', addToCart)
     // $(document).on('click', '#test', addToCart);
     return `
