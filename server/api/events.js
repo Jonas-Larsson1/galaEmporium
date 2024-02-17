@@ -31,7 +31,7 @@ export default function event(server) {
   })
 
   server.post('/api/event', async (req, res)=> {
-    try{
+    try {
     const newEvent = new eventModel({
       name: req.body.name,
       description: req.body.description,
@@ -50,17 +50,20 @@ export default function event(server) {
     
   })
 
-  server.put('/api/event/:id', async(req, res)=> {
-    try{
-    const id = req.params._id
-    const updatedEvent = req.body
-    const data = await eventModel.findOneAndUpdate(id, updatedEvent, {
-        new:true
-    })
-    res.json(data)
-  }catch{
-      res.json("404: Data was not updated")
-  }
+  server.put('/api/event/:id', async (req, res) => {
+    try {
+      const eventToUpdate = await eventModel.findById(req.params.id).populate('club_id');
+      if (!eventToUpdate.club_id.owners.includes(req.session.user)) {
+        return res.status(401).json({ message: "You are not a registered club owner." });
+      } else {
+        const updatedEvent = await eventModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        return res.status(200).json({
+          old: eventToUpdate,
+          new: updatedEvent
+        });
+      }
+    } catch (error) {
+      return res.status(500).json({ message: "Event was not updated" });
+    }
   })
-
 }
