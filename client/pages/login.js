@@ -24,7 +24,7 @@ export default function login() {
     email: $('#login [name="email"]').val(),
     password: $('#login [name="password"]').val()
   }
-  console.log(data)
+  // console.log(data)
 
   
   fetch('/api/login', {

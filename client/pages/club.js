@@ -1,10 +1,10 @@
 import { utcToDate, isValidDate } from "../functions/utcToDate.js"
-export default async function club(param) {
-  const response = await fetch(`/api/club/${param}`)
+export default async function club(clubId) {
+  const response = await fetch(`/api/club/${clubId}`)
   const club = await response.json()
-  const ownerResponse = await fetch(`/api/club/${param}/users`)
+  const ownerResponse = await fetch(`/api/club/${clubId}/users`)
   const clubOwners = await ownerResponse.json()
-  const eventResponse = await fetch(`/api/clubEvents/${club._id}`)
+  const eventResponse = await fetch(`/api/clubEvents/${clubId}`)
   const clubEvent = await eventResponse.json()
   let ownerData = ""
   for(let data of clubOwners) {
