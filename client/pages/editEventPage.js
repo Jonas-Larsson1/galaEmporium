@@ -1,8 +1,8 @@
 export default async function editEventPage(eventId){
-    let event, method
+    let event, method, currentClubName
     if (eventId) {
         event = await (await fetch(`/api/event/${eventId}`)).json()
-
+        currentClubName = event.club_id.name
         method = 'put'     
     } else {
         event = {
@@ -24,7 +24,6 @@ export default async function editEventPage(eventId){
 
         const user = await (await fetch(`/api/user/${userId.loggedIn}`)).json()
         const userClubs = user.club_id
-        const currentClubName = event.club_id.name
 
         let club_data = ""
         for(let club of userClubs){
