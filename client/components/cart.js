@@ -4,6 +4,8 @@ import { findItemByTitle, countdownSecondsToTwoDigits, countdownMinutesToTwoDigi
 import { updateCart } from "./update-cart.js";
 
 
+
+
 // const countdownDiv = document.querySelector("#countdown");
 
 // if anything in session storage, get it
@@ -114,24 +116,24 @@ export function emptyCart() {
   timeWhenLastItemWasAdded = null;
 }
 
-// function updateCountdown() {
-//   if (timeWhenLastItemWasAdded) {
-//     let currentTime = new Date().getTime();
-//     let timeElapsed = currentTime - timeWhenLastItemWasAdded;
-//     let timeRemaining = Math.max(reservationTimeout - timeElapsed, 0);
+function updateCountdown() {
+  if (timeWhenLastItemWasAdded) {
+    let currentTime = new Date().getTime();
+    let timeElapsed = currentTime - timeWhenLastItemWasAdded;
+    let timeRemaining = Math.max(reservationTimeout - timeElapsed, 0);
 
-//     let minutes = Math.floor(timeRemaining / (1000 * 60));
-//     let seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-//     seconds = countdownSecondsToTwoDigits(seconds);
-//     minutes = countdownMinutesToTwoDigits(minutes);
-//     // countdownDiv.textContent = `Your tickets are reserved for another ${minutes}:${seconds}`;
+    let minutes = Math.floor(timeRemaining / (1000 * 60));
+    let seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+    seconds = countdownSecondsToTwoDigits(seconds);
+    minutes = countdownMinutesToTwoDigits(minutes);
+    // countdownDiv.textContent = `Your tickets are reserved for another ${minutes}:${seconds}`;
 
-//     if (timeRemaining === 0) {
-//       clearInterval(countdownInterval);
-//       checkIfReservationExpired();
-//     }
-//   }
-// }
+    if (timeRemaining === 0) {
+      clearInterval(countdownInterval);
+      checkIfReservationExpired();
+    }
+  }
+}
 
 // check initial state of btn
 // toggleCartButtons();
