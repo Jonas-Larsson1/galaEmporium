@@ -1,9 +1,9 @@
 import { utcToDate, isValidDate } from "../functions/utcToDate.js"
-import { addToCart } from "../components/cart.js"
 import { isClubOwner } from "../functions/general.js"
-let events = []
+
 export default async function showEvents(clubId){
-    
+    let events
+
     if (!clubId) {
         const response = await fetch ("/api/event")
         events = await response.json()
@@ -11,17 +11,12 @@ export default async function showEvents(clubId){
         events = await (await fetch(`/api/clubEvents/${clubId}`)).json()
     }
 
-    
-    // console.log(events)
-
-    // console.log(result)
-   
     let html = ""
     events.sort((a,b) => {
         return new Date(a.date) - new Date(b.date)
     })
 
-    for(let [index,event] of events.entries()){
+    for(let event of events){
         
         html+= `
         <div id="event-container">
@@ -36,23 +31,13 @@ export default async function showEvents(clubId){
                 <ul>    
                     <li>Cost: ${event.cost}</li> 
                     <li>Date: ${isValidDate(event.date) ? utcToDate(event.date) : ""}</li> 
-                    <button onclick= "findEvent(${index});" id="test">Add to cart</button>
                 </ul>
             </u>
         </div>`
     }
-    // $('#test').on('click', addToCart)
-    // $(document).on('click', '#test', addToCart);
     return `
     <article>${html}</article>`
 
 }
 
-function findEvent(index){
-
-    addToCart(result[index])
-
-}
-
-window.findEvent = findEvent
 

@@ -1,21 +1,10 @@
 import home from "./pages/home.js";
 import club from "./pages/club.js";
 import login from "./pages/login.js";
-/* import cart from "./components/cart.js" */
 import updateNavbar from "./components/navbar.js";
 import register from "./pages/register.js";
 import showEvents from "./pages/event.js";
 import editEventPage from "./pages/editEventPage.js";
-
-// cart();
-
-
-// när html-fil är uppladdad
-// $( document ).ready(function() {
-//   updateNavbar()
-// })
-
-
 
 async function route() {
   updateNavbar()
@@ -25,8 +14,6 @@ async function route() {
     case "":
       $('main').html(await home())
       break;
-    // case "mypage":
-    //   $('main').html(mypage())
     case "events":
       $('main').html(await showEvents())
       break;
@@ -36,17 +23,11 @@ async function route() {
     case "club":
       $('main').html(await club(params[1]))
       break;
-    /*case "cart":
-      $('main').html(cart())
-      break;*/
     case "register":
       $('main').html(await register())
       break;
     case "login":
       $('main').html(await login())
-      break;
-    case "cart":
-      $('main').html(cart())
       break;
     default:
       console.log("404 You've broken the internet")
