@@ -1,75 +1,121 @@
 #club-page {
-    display: grid;
-    grid-template-rows: 1fr auto;
+  display: grid;
+  grid-template-rows: 1fr auto;
 }
 
 #top-section {
-    display: grid;
-    height: 20rem;
-    grid-template-columns: auto 1fr;
-    column-gap: 1rem;
-    margin: 0.5rem;
+  display: grid;
+  height: 20rem;
+  grid-template-columns: auto 1fr;
+  column-gap: 1rem;
+  margin: 0.5rem;
 }
 
 #club-page img {
-    height: 20rem;
-    max-width: auto;
+  height: 20rem;
+  max-width: auto;
 }
 
 #club-info {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    row-gap: 0.5rem;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  row-gap: 0.5rem;
 }
 
 #club-page h2 {
-    justify-self: center;
-    text-decoration: underline;
+  justify-self: center;
+  text-decoration: underline;
 }
 
 #club-name {
-
 }
 
 #club-description {
-
 }
 
 #club-owner {
-    display: flex;
-    flex-direction: row;
-    font-weight: bold;
-    padding: 0;
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  padding: 0;
 }
 
 #club-owner li {
-    list-style: none;
-    font-weight: normal;
-    margin-left: 0.5rem;
+  list-style: none;
+  font-weight: normal;
+  margin-left: 0.5rem;
 }
 
 #bottom-section {
-    display: grid;
-    grid-template-rows: auto 1fr;
-    row-gap: 1rem;
-    margin: 0.5rem;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  row-gap: 1rem;
+  margin: 0.5rem;
+}
+
+#events-header {
+    display: flex;
 }
 
 #events-container {
-    display: grid;
-    grid-auto-flow: row;
-    row-gap: 0.5rem;
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 0.5rem;
 }
 
 #club-page article {
-    height: 30rem;
-    background-color: rgb(56, 4, 66);
-    color: white;
-    border-radius: 2rem;
+  height: 30rem;
+  background-color: rgb(56, 4, 66);
+  color: white;
+  border-radius: 2rem;
 }
 
-.event-image{
-    width: calc(100% - 2rem);
-    margin: 1rem;
-    border-radius: 2rem;
+.event-image {
+  width: calc(100% - 2rem);
+  margin: 1rem;
+  border-radius: 2rem;
 }
+
+#edit-container {
+  display: none;
+  position: sticky;
+}
+
+#edit-button {
+  display: block;
+  margin-left: auto;
+  width: 4.5rem;
+  height: 2.5rem;
+  background-color: rgb(20, 129, 255);
+  color: white;
+  font-size: 22px;
+  text-align: center;
+  border: transparent;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.modal-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+  }
+  
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
