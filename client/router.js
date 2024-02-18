@@ -1,5 +1,5 @@
 import home from "./pages/home.js";
-import club from "./pages/club.js";
+import club from "./pages/club.js"
 import login from "./pages/login.js";
 import cart from "./components/cart.js"
 import updateNavbar from "./components/navbar.js"
@@ -31,7 +31,8 @@ async function route() {
       $('main').html(await event())
       break;
     case "club":
-      $('main').html(await club(params[1]))
+      $('main').html(await club.club(params[1]))
+      club.editClick()
       break;
     case "cart":
       $('main').html(cart())

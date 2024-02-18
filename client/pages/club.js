@@ -1,22 +1,31 @@
-// const editFunction = () => {
-//   const dialogElement = document.getElementById("edit-dialog");
-//   dialogElement.style.display = "flex";
+//wait for edit button click
+const editClick = () => {
+  const editButtonElement = document.getElementById("edit-button");
+  if (editButtonElement) {    
+    editButtonElement.addEventListener("click", editFunction);
+  }
+}
+//listen for confirm or cancel click
+const editFunction = () => {
 
-//   const cancelButtonElement = document.getElementById("cancel-button");
-//   cancelButtonElement.addEventListener("click", () => {
-//     dialogElement.style.display = "none";
-//   });
+  const dialogElement = document.getElementById("edit-dialog");
+  dialogElement.style.display = "flex";
 
-//   const confirmButtonElement = document.getElementById("confirm-button");
-//   confirmButtonElement.addEventListener("click", () => {
-//     // Perform actions for editing the club page
-//     console.log("Editing the club page...");
+  const cancelButtonElement = document.getElementById("cancel-button");
+  cancelButtonElement.addEventListener("click", () => {
+    dialogElement.style.display = "none";
+  });
 
-//     dialogElement.style.display = "none";
-//   });
-// }
+  const confirmButtonElement = document.getElementById("confirm-button");
+  confirmButtonElement.addEventListener("click", () => {
+    // Editing the club page
+    console.log("Editing the club page...");
 
-export default async function club(param) {
+    dialogElement.style.display = "none";
+  });
+}
+
+async function club(param) {
   const response = await fetch(`/api/club/${param}`)
   const club = await response.json()
   const ownerResponse = await fetch(`/api/club/${param}/users`)
@@ -93,6 +102,14 @@ export default async function club(param) {
     </main>
     `;
 }
+
+const funcs = {
+  "club" : club,
+  "editClick" : editClick
+}
+
+
+export default funcs;
 
 // club("param").then(content => {
 //   document.querySelector(".main").innerHTML = content;
