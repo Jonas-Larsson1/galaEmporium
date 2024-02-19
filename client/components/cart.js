@@ -79,6 +79,7 @@ export function addToCart(event) {
       existingCartItems.forEach(item => {
         if (item.event_id === event._id) {
           item.amount++
+          item.totalPrice += item.price
           alreadyInCart = true
         }
       })
@@ -90,7 +91,8 @@ export function addToCart(event) {
         event_id: event._id,
         amount: 1,
         date: event.date,
-        price: event.cost
+        price: event.cost,
+        totalPrice: event.cost 
       });
     }
 

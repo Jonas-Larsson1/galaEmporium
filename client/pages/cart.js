@@ -21,11 +21,11 @@ export default function cart(){
             <p>${item.title}</p>
             <p>${formattedDate} ${formattedTime}</p>
             <div>
-                <button class="count-btn" data-event-id="${item.event_id}">${eventIdCount[item.event_id].count}</button>
+                <button class="count-btn" data-event-id="${item.event_id}">${item.amount}</button>
                 <button class="increase-btn" data-event-id="${item.event_id}">+</button>
                 <button class="decrease-btn" data-event-id="${item.event_id}">-</button>
             </div> 
-            <div class="price" data-price-id="${item.event_id}">${item.price}</div>
+            <div class="price" data-price-id="${item.event_id}">${item.totalPrice}</div>
             <div class="price" data-singlePrice-id="${item.event_id}">${item.price}</div>
             </div>
             `;
@@ -39,37 +39,40 @@ export default function cart(){
     $('main').html(cartDiv);
 
     $('.increase-btn').click(function() {
-        // console.log('Increase button clicked'); 
         const eventId = $(this).data('event-id');
-        eventIdCount[eventId].count++; // Increment the count
-        updateCartContents(eventId, eventIdCount[eventId].count ); // Update the cartContents array
-        // $(this).prev('.count-btn').text(eventIdCount[eventId].count); // Update the button text
-        $(`.count-btn[data-event-id="${eventId}"]`).text(eventIdCount[eventId].count); // Update the button text
-        updateTotalPrice(eventId);
+        const cartContentsIndex = cartContents.findIndex(item => {
+            return item.event_id === eventId
+        })
+        const cartItem = cartContents[cartContentsIndex]
+        cartItem.amount++; // Increment the count
+        updateCartContents(); // Update the cartContents array
+        $(`.count-btn[data-event-id="${eventId}"]`).text(cartItem.amount); // Update the button text
+        updateTotalPrice(cartItem);
         
     });
 
     $('.decrease-btn').click(function() {
-        // console.log('Decrease button clicked'); 
         const eventId = $(this).data('event-id');
-        eventIdCount[eventId].count--; // Increment the count
-        // $(this).prev('.count-btn').text(eventIdCount[eventId].count); // Update the button text
-        // if (eventIdCount[eventId].count === 0) {
-        //     removeItemFromCart(eventId); // Remove item if count becomes 0
-        // } else {
-        //     updateCartContents(eventId, eventIdCount[eventId].count); // Update the cartContents array
-        // }
-        $(`.count-btn[data-event-id="${eventId}"]`).text(eventIdCount[eventId].count); // Update the button text
-        updateTotalPrice(eventId);
+        const cartContentsIndex = cartContents.findIndex(item => {
+            return item.event_id === eventId
+        })
+        const cartItem = cartContents[cartContentsIndex]
+        cartItem.amount++; // Increment the count
+        updateCartContents(); // Update the cartContents array
+        $(`.count-btn[data-event-id="${eventId}"]`).text(cartItem.amount); // Update the button text
+        updateTotalPrice(cartItem);
     });
+
     
-    function updateTotalPrice(eventId) {
+    
+    function updateTotalPrice(cartItem) {
         // console.log(eventId)
         // console.log(eventId.count)
-        const price = ($(`.price[data-singlePrice-id="${eventId}"]`).text())
-        const count = eventIdCount[eventId].count;
+        const price = ($(`.price[data-singlePrice-id="${cartItem.event_id}"]`).text())
+        const count = cartItem.amount;
         const totalPrice = (price * count).toFixed(2); // Ensure two decimal places
-        $(`.price[data-price-id="${eventId}"]`).text(totalPrice);
+        cartItem.totalPrice = totalPrice
+        $(`.price[data-price-id="${cartItem.event_id}"]`).text(totalPrice);
         
     }
     
