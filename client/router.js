@@ -1,21 +1,11 @@
 import home from "./pages/home.js";
 import club from "./pages/club.js"
 import login from "./pages/login.js";
-import cart from "./components/cart.js"
-import updateNavbar from "./components/navbar.js"
+import updateNavbar from "./components/navbar.js";
 import register from "./pages/register.js";
-import event from "./pages/event.js";
-import { createEvent } from "./pages/event.js";
-
-// cart();
-
-
-// när html-fil är uppladdad
-// $( document ).ready(function() {
-//   updateNavbar()
-// })
-
-
+import mypage from "./pages/mypage.js";
+import showEvents from "./pages/event.js";
+import editEventPage from "./pages/editEventPage.js";
 
 async function route() {
   updateNavbar()
@@ -25,17 +15,18 @@ async function route() {
     case "":
       $('main').html(await home())
       break;
-    // case "mypage":
-    //   $('main').html(mypage())
+    case "mypage":
+      $('main').html(await mypage())
+     break;
     case "events":
-      $('main').html(await event())
+      $('main').html(await showEvents())
+      break;
+    case "editEventPage":
+      $('main').html(await editEventPage(params[1], params[2]))
       break;
     case "club":
       $('main').html(await club.club(params[1]))
       club.editClick()
-      break;
-    case "cart":
-      $('main').html(cart())
       break;
     case "register":
       $('main').html(await register())
@@ -43,9 +34,9 @@ async function route() {
     case "login":
       $('main').html(await login())
       break;
-    case "cart":
-      $('main').html(cart())
-      break;
+    // case "cart":
+    //   $('main').html(cart())
+    //   break;
     default:
       console.log("404 You've broken the internet")
   }
