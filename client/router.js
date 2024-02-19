@@ -6,6 +6,7 @@ import register from "./pages/register.js";
 import mypage from "./pages/mypage.js";
 import showEvents from "./pages/event.js";
 import editEventPage from "./pages/editEventPage.js";
+import editClubPage from "./pages/editClubPage.js";
 
 async function route() {
   updateNavbar()
@@ -22,11 +23,13 @@ async function route() {
       $('main').html(await showEvents())
       break;
     case "editEventPage":
-      $('main').html(await editEventPage(params[1], params[2]))
+      $('main').html(await editEventPage(params[1], params[1]))
       break;
     case "club":
       $('main').html(await club.club(params[1]))
-      club.editClick()
+      break;
+    case "editClubPage":
+      $('main').html(await editClubPage(params[1], params[2]))
       break;
     case "register":
       $('main').html(await register())

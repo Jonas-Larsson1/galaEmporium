@@ -1,0 +1,25 @@
+#edit-form {
+    display: flex;
+    width: 20rem;
+    height: fit-content;
+    flex-direction: column;
+}
+
+#edit-form input {
+    height: 3rem;
+}
+
+#edit-name {
+
+}
+
+#edit-description {
+    height: 8rem;
+}
+
+#edit-image {
+}
+
+#edit-submit {
+
+}

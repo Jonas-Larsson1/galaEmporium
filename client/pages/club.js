@@ -2,34 +2,6 @@
 import showEvents from "./event.js"
 import { isClubOwner } from "../functions/general.js"
 
-//wait for edit button click
-const editClick = () => {
-  const editButtonElement = document.getElementById("edit-button");
-  if (editButtonElement) {    
-    editButtonElement.addEventListener("click", editFunction);
-  }
-}
-
-//listen for confirm or cancel click
-const editFunction = () => {
-
-  const dialogElement = document.getElementById("edit-dialog");
-  dialogElement.style.display = "flex";
-
-  const cancelButtonElement = document.getElementById("cancel-button");
-  cancelButtonElement.addEventListener("click", () => {
-    dialogElement.style.display = "none";
-  });
-
-  const confirmButtonElement = document.getElementById("confirm-button");
-  confirmButtonElement.addEventListener("click", () => {
-    // Editing the club page
-    console.log("Editing the club page...");
-
-    dialogElement.style.display = "none";
-  });
-}
-
 async function club(clubId) {
   const response = await fetch(`/api/club/${clubId}`)
   const club = await response.json()
@@ -50,22 +22,10 @@ async function club(clubId) {
 
   const eventData = await showEvents(clubId)
 
-  let editButton = "";
-  let modalDialog = "";
+  let editButton = ``;
   if(club.owners.includes(logInData.loggedIn)) {
-    editButton = `<button id="edit-button">Edit</button>`;
-    modalDialog = `
-    <div id="edit-dialog" class="modal-dialog">
-      <div class="modal-content">
-        <h2>Confirmation</h2>
-        <p>Are you sure you want to edit the page?</p>
-        <div class="modal-actions">
-          <button id="cancel-button">Cancel</button>
-          <button id="confirm-button">Confirm</button>
-        </div>
-      </div>
-    </div>
-    `;
+    editButton = `
+    <a href ="#editClubPage?${club._id}" id="edit-button">Edit</a>`;
   }
 
   return `
@@ -90,14 +50,29 @@ async function club(clubId) {
               ${eventData}
         </div>
       </section>
-      ${modalDialog}
     </main>
   `;
 }
 
 const funcs = {
   "club" : club,
-  "editClick" : editClick
 }
 
 export default funcs;
+
+
+// const dialogElement = document.getElementById("edit-dialog");
+// dialogElement.style.display = "flex";
+
+// const cancelButtonElement = document.getElementById("cancel-button");
+// cancelButtonElement.addEventListener("click", () => {
+//   dialogElement.style.display = "none";
+// });
+
+// const confirmButtonElement = document.getElementById("confirm-button");
+// confirmButtonElement.addEventListener("click", () => {
+//   // Editing the club page
+//   console.log("Editing the club page...");
+
+//   dialogElement.style.display = "none";
+// });
