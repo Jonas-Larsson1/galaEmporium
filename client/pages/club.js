@@ -1,10 +1,12 @@
-import { utcToDate, isValidDate } from "../functions/utcToDate.js"
-export default async function club(param) {
-  const response = await fetch(`/api/club/${param}`)
+import { utcToDate, isValidDate } from "../functions/utcToDate.js"// import { utcToDate, isValidDate } from "../functions/utcToDate.js"
+import showEvents from "./event.js"
+import { isClubOwner } from "../functions/general.js"
+export default async function club(clubId) {
+  const response = await fetch(`/api/club/${clubId}`)
   const club = await response.json()
-  const ownerResponse = await fetch(`/api/club/${param}/users`)
+  const ownerResponse = await fetch(`/api/club/${clubId}/users`)
   const clubOwners = await ownerResponse.json()
-  const eventResponse = await fetch(`/api/clubEvents/${club._id}`)
+  const eventResponse = await fetch(`/api/clubEvents/${clubId}`)
   const clubEvent = await eventResponse.json()
   let ownerData = ""
   for(let data of clubOwners) {
@@ -14,20 +16,22 @@ export default async function club(param) {
     `
   }
 
-  let eventData = ""
-  for(let data of clubEvent){
-    // console.log(data.name)
-    eventData += 
-    `
-    <article>
-        <img src="${data.img}" class="event-image">
-        <h1>${data.name}</h1>
-        <h2>${data.description}</h2> 
-        <h2>${isValidDate(data.date) ? utcToDate(data.date) : ""}</h2>
+  // let eventData = ""
+  // for(let data of clubEvent){
+  //   // console.log(data.name)
+  //   eventData += 
+  //   `
+  //   <article>
+  //       <img src="${data.img}" class="event-image">
+  //       <h1>${data.name}</h1>
+  //       <h2>${data.description}</h2> 
+  //       <h2>${isValidDate(data.date) ? utcToDate(data.date) : ""}</h2>
 
-    </article>
-    `
-  }
+  //   </article>
+  //   `
+  // }
+
+  const eventData = await showEvents(clubId)
 
   // console.log(param)
   
@@ -45,6 +49,9 @@ export default async function club(param) {
       <section id="bottom-section">
         <h2 id="events-header">Club events</h2>
         <div id="events-container">
+            <a href ="#editEventPage" class="material-symbols-outlined">
+              ${await isClubOwner(club._id) ? "Create new event" : ""} 
+            </a>
               ${eventData}
         </div>
       </section>

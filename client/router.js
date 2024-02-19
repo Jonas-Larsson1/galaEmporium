@@ -4,19 +4,9 @@ import login from "./pages/login.js";
 import cart from "./pages/cart.js";
 import updateNavbar from "./components/navbar.js";
 import register from "./pages/register.js";
-import event from "./pages/event.js";
-import { createEvent } from "./pages/event.js";
+import mypage from "./pages/mypage.js";
+import showEvents from "./pages/event.js";
 import editEventPage from "./pages/editEventPage.js";
-
-// cart();
-
-
-// när html-fil är uppladdad
-// $( document ).ready(function() {
-//   updateNavbar()
-// })
-
-
 
 async function route() {
   updateNavbar()
@@ -26,19 +16,20 @@ async function route() {
     case "":
       $('main').html(await home())
       break;
-    // case "mypage":
-    //   $('main').html(mypage())
+    case "mypage":
+      $('main').html(await mypage())
+     break;
     case "events":
-      $('main').html(await event())
+      $('main').html(await showEvents())
+      break;
+    case "editEventPage":
+      $('main').html(await editEventPage(params[1], params[2]))
       break;
     case "editEventPage":
       $('main').html(await editEventPage(params[1]))
     case "club":
       $('main').html(await club(params[1]))
       break;
-    /*case "cart":
-      $('main').html(cart())
-      break;*/
     case "register":
       $('main').html(await register())
       break;

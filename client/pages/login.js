@@ -18,13 +18,13 @@ export default function login() {
 
  async function submitForm(event) {
   event.preventDefault();
-  console.log('submitted')
+  // console.log('submitted')
 
   const data = {
     email: $('#login [name="email"]').val(),
     password: $('#login [name="password"]').val()
   }
-  console.log(data)
+  // console.log(data)
 
   
   fetch('/api/login', {

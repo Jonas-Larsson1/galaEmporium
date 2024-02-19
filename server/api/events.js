@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import { clubModel } from "./club.js"
 
 const eventSchema = mongoose.Schema({
   name: String,
@@ -27,40 +28,47 @@ export default function event(server) {
   server.get('/api/clubEvents/:club_id', async (req, res) => {
     res.json(await eventModel.find({
       club_id: req.params.club_id
-    }))
+    }).populate("club_id"))
   })
 
   server.post('/api/event', async (req, res)=> {
-    try{
-    const newEvent = new eventModel({
-      name: req.body.name,
-      description: req.body.description,
-      date: req.body.date,
-      cost:req.body.cost,
-      max_attendees: req.body.max_attendees,
-      club_id: req.body.club_id,
-      img: req.body.img, //Kommer inte att laddas upp som bild... 
-      tickets_left:req.body.tickets_left 
-    })
-    const result = await newEvent.save()
-    res.json(result)
+    try {
+      const club = await clubModel.findById(req.body.club_id)
+      if (!club.owners.includes(req.session.user)) {
+        return res.status(401).json({ message: "You are not a registered club owner." });
+      } else { 
+        const newEvent = new eventModel({
+          name: req.body.name,
+          description: req.body.description,
+          date: req.body.date,
+          cost:req.body.cost,
+          max_attendees: req.body.max_attendees,
+          club_id: req.body.club_id,
+          img: req.body.img, //Kommer inte att laddas upp som bild... 
+        })
+        const result = await newEvent.save()
+        return res.status(200).json(result)
+    }
     } catch(error){
         res.json({message: "404: Could not post event", error})
     }
     
   })
 
-  server.put('/api/event/:id', async(req, res)=> {
-    try{
-    const id = req.params._id
-    const updatedEvent = req.body
-    const data = await eventModel.findOneAndUpdate(id, updatedEvent, {
-        new:true
-    })
-    res.json(data)
-  }catch{
-      res.json("404: Data was not updated")
-  }
+  server.put('/api/event/:id', async (req, res) => {
+    try {
+      const eventToUpdate = await eventModel.findById(req.params.id).populate('club_id');
+      if (!eventToUpdate.club_id.owners.includes(req.session.user)) {
+        return res.status(401).json({ message: "You are not a registered club owner." });
+      } else {
+        const updatedEvent = await eventModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        return res.status(200).json({
+          old: eventToUpdate,
+          new: updatedEvent
+        });
+      }
+    } catch (error) {
+      return res.status(500).json({ message: "Event was not updated" });
+    }
   })
-
 }
