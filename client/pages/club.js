@@ -68,9 +68,6 @@ async function club(clubId) {
     `;
   }
 
-  console.log(logInData)
-  console.log(param)
-
   return `
     <main id="club-page">
       <section id="top-section">
@@ -95,7 +92,7 @@ async function club(clubId) {
       </section>
       ${modalDialog}
     </main>
-    `;
+  `;
 }
 
 const funcs = {
@@ -103,42 +100,4 @@ const funcs = {
   "editClick" : editClick
 }
 
-
 export default funcs;
-
-// club("param").then(content => {
-//   document.querySelector(".main").innerHTML = content;
-
-//   const editButtonElement = document.getElementById("edit-button");
-//   if (editButtonElement) {
-//     editButtonElement.addEventListener("click", editFunction);
-//   }
-// });
-
-  // const editButtonElement = document.getElementById("edit-button");
-  // if(editButtonElement) {
-  //   editButtonElement.addEventListener("click", () => {
-  //     console.log("Edit button clicked");
-  //   })
-  // }
-
-    // if(club.owners.includes(req.session.user)) {
-  //   //Edit function
-  //   window.alert("You are a club owner!")
-  // } else {
-  //   window.alert("You are NOT a club owner!")
-  // }
-
-  // if(req.session.user = club.owners) {
-  //   window.alert("Wow!")
-  // }
-
-  // let clubData = club.owners;
-  // for(let data of clubData) {
-  //   console.log(req.session.user, data)
-  //   if(req.session.user = data) {
-  //     if(window.confirm("Click confirm to edit page")) {
-
-  //     }
-  //   }
-  // }
