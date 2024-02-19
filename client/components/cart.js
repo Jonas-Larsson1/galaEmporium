@@ -74,7 +74,7 @@ export function addToCart(event) {
 
     let alreadyInCart = false 
     const existingCartItems = JSON.parse(sessionStorage.getItem("cartContents")) || []
-    console.log(existingCartItems)
+    // console.log(existingCartItems)
     if (existingCartItems.length > 0) {
       existingCartItems.forEach(item => {
         if (item.event_id === event._id) {
@@ -96,7 +96,7 @@ export function addToCart(event) {
       });
     }
 
-    console.log(alreadyInCart)
+    // console.log(alreadyInCart)
     sessionStorage.setItem("cartContents", JSON.stringify(existingCartItems));
       
 
