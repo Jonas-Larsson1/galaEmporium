@@ -58,7 +58,7 @@ export default async function editEventPage(eventId){
         <label for="img">Change image</label><br>
         <input type="text" id="img" name="img" value="${event.img}"><br>
         
-        <input type="submit" value="Submit" onclick="updateEvent('${eventId}', ${method}); return false;">
+        <input type="submit" value="Submit" onclick="updateEvent('${eventId}', '${method}'); return false;">
         </form>
         `  
         } else {
@@ -75,11 +75,13 @@ async function updateEvent(eventId, method){
         description: $('[name="description"]').val(),
         cost: $('[name="cost"]').val(),
         date: $('[name="date"]').val(),
-        max_attendees: $('name="max_attendees"').val(),
-        club_id: $('name="club"').val(),
+        max_attendees: $('[name="max_attendees"]').val(),
+        club_id: $('[name="club"]').val(),
         img: $('[name="img"]').val(),
     }
 
+    const clubIdHref = updatedData.club_id
+    let hash
     let event
     if (method === 'put') {
         event = await fetch(`/api/event/${eventId}`, {
@@ -89,6 +91,9 @@ async function updateEvent(eventId, method){
             },
             body: JSON.stringify(updatedData)
         })
+
+        hash = '#events' 
+
     } else {
         event = await fetch(`/api/event`, {
             method: "post" ,
@@ -97,7 +102,11 @@ async function updateEvent(eventId, method){
             },
             body: JSON.stringify(updatedData)
         })
+        
+        hash = `#club?${clubIdHref}`
     }
+    
+    window.location.hash = hash 
     // const res = await event.json()
     // console.log(res)
 } 

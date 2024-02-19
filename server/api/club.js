@@ -7,7 +7,7 @@ const clubSchema = mongoose.Schema({
   owners: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }]
 });
 
-const clubModel = mongoose.model('clubs', clubSchema)
+export const clubModel = mongoose.model('clubs', clubSchema)
 
 export default function club(server) {
 

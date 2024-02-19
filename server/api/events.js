@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import { clubModel } from "./club.js"
 
 const eventSchema = mongoose.Schema({
   name: String,
@@ -32,7 +33,8 @@ export default function event(server) {
 
   server.post('/api/event', async (req, res)=> {
     try {
-      if (!eventToUpdate.club_id.owners.includes(req.session.user)) {
+      const club = await clubModel.findById(req.body.club_id)
+      if (!club.owners.includes(req.session.user)) {
         return res.status(401).json({ message: "You are not a registered club owner." });
       } else { 
         const newEvent = new eventModel({
@@ -44,8 +46,8 @@ export default function event(server) {
           club_id: req.body.club_id,
           img: req.body.img, //Kommer inte att laddas upp som bild... 
         })
-      const result = await newEvent.save()
-      res.json(result)
+        const result = await newEvent.save()
+        return res.status(200).json(result)
     }
     } catch(error){
         res.json({message: "404: Could not post event", error})
