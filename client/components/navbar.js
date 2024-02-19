@@ -7,6 +7,8 @@ const updateNavbar = () => {
 
         if (data.loggedIn){
             // console.log("Användaren är inloggad")
+            sessionStorage.setItem('userId', JSON.stringify(data));
+            // console.log(data)
             content += `
                 <a href="#mypage" id="mypage">Mina Sidor</a>
                 <a href="#cart" id="cart"><i class="fa-solid fa-cart-shopping"></i></a>

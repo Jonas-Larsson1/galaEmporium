@@ -74,10 +74,13 @@ export function addToCart(event) {
     cartContents.push({
       title: event.name,
       event_id: event._id,
-      amount: 1
+      amount: 1,
+      date: event.date,
+      price: event.cost
     });
 
     sessionStorage.setItem("cartContents", JSON.stringify(cartContents));
+   
   }
 
   clearInterval(countdownInterval);
