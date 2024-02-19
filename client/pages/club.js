@@ -60,7 +60,7 @@ async function club(param) {
 
   let editButton = "";
   let modalDialog = "";
-  if(club.owners.includes("65ccb0cc6d32eb9c107e1fae")) { // Change to logInData.loggedIn
+  if(club.owners.includes(logInData.loggedIn)) {
     editButton = `<button id="edit-button">Edit</button>`;
     modalDialog = `
     <div id="edit-dialog" class="modal-dialog">
@@ -119,10 +119,6 @@ export default funcs;
 //     editButtonElement.addEventListener("click", editFunction);
 //   }
 // });
-
-
-
-
 
   // const editButtonElement = document.getElementById("edit-button");
   // if(editButtonElement) {
