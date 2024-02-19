@@ -3,7 +3,6 @@ export default function cart(){
     cartContents = JSON.parse(sessionStorage.getItem('cartContents'));
     let cartItemsHtml = ''
     cartContents.forEach(item => {
-        console.log(item)
         const eventDate = new Date(item.date);
         const formattedDate = eventDate.toLocaleDateString(); 
         const formattedTime = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); 
@@ -52,9 +51,15 @@ const increaseDecrease = (eventId, operator) => {
     } else {
         cartItem.amount--
     }
+
+    if (cartItem.amount <= 0) {
+        cartContents.splice(cartContentsIndex, 1)
+        location.reload()
+    } else {
+        $(`.count-btn[data-event-id="${eventId}"]`).text(cartItem.amount); // Update the button text
+        updateTotalPrice(cartItem);
+    }
     updateCartContents(); // Update the cartContents array
-    $(`.count-btn[data-event-id="${eventId}"]`).text(cartItem.amount); // Update the button text
-    updateTotalPrice(cartItem);
 }
 
 function updateTotalPrice(cartItem) {
