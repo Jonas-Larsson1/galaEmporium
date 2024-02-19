@@ -1,12 +1,15 @@
 // import { utcToDate, isValidDate } from "../functions/utcToDate.js"
 import showEvents from "./event.js"
-import { isClubOwner } from "../functions/general.js"//wait for edit button click
+import { isClubOwner } from "../functions/general.js"
+
+//wait for edit button click
 const editClick = () => {
   const editButtonElement = document.getElementById("edit-button");
   if (editButtonElement) {    
     editButtonElement.addEventListener("click", editFunction);
   }
 }
+
 //listen for confirm or cancel click
 const editFunction = () => {
 
@@ -45,20 +48,7 @@ async function club(clubId) {
     `
   }
 
-  // let eventData = ""
-  // for(let data of clubEvent){
-  //   // console.log(data.name)
-  //   eventData += 
-  //   `
-  //   <article>
-  //       <img src="${data.img}" class="event-image">
-  //       <h1>${data.name}</h1>
-  //       <h2>${data.description}</h2> 
-  //       <h2>${isValidDate(data.date) ? utcToDate(data.date) : ""}</h2>
-
-  //   </article>
-  //   `
-  // }
+  const eventData = await showEvents(clubId)
 
   let editButton = "";
   let modalDialog = "";
