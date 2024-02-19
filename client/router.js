@@ -3,6 +3,19 @@ import club from "./pages/club.js";
 import login from "./pages/login.js";
 import updateNavbar from "./components/navbar.js";
 import register from "./pages/register.js";
+import event from "./pages/event.js";
+import { createEvent } from "./pages/event.js";
+import mypage from "./pages/mypage.js";
+
+// cart();
+
+
+// när html-fil är uppladdad
+// $( document ).ready(function() {
+//   updateNavbar()
+// })
+
+
 import showEvents from "./pages/event.js";
 import editEventPage from "./pages/editEventPage.js";
 
@@ -14,6 +27,9 @@ async function route() {
     case "":
       $('main').html(await home())
       break;
+    case "mypage":
+      $('main').html(await mypage())
+     break;
     case "events":
       $('main').html(await showEvents())
       break;
@@ -29,6 +45,9 @@ async function route() {
     case "login":
       $('main').html(await login())
       break;
+    // case "cart":
+    //   $('main').html(cart())
+    //   break;
     default:
       console.log("404 You've broken the internet")
   }

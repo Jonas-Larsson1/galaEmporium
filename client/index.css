@@ -8,6 +8,8 @@
 
 @import url("./components/navbar.css");
 
+
 @import url("pages/login.css");
 @import url("pages/register.css");
 @import url("pages/club.css"); 
+@import url("pages/mypage.css");
