@@ -1,8 +1,9 @@
 import { utcToDate, isValidDate } from "../functions/utcToDate.js"
 import { isClubOwner } from "../functions/general.js"
+import { addToCart } from "../components/cart.js"
 
+let events = []
 export default async function showEvents(clubId){
-    let events
 
     if (!clubId) {
         const response = await fetch ("/api/event")
@@ -43,9 +44,8 @@ export default async function showEvents(clubId){
 }
 
 function findEvent(index){
-
-    addToCart(result[index])
-
+    addToCart(events[index])
 }
 
+window.findEvent = findEvent
 
