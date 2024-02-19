@@ -17,6 +17,8 @@ export default async function showEvents(clubId){
         return new Date(a.date) - new Date(b.date)
     })
 
+    const loggedIn = await (await fetch ('/api/login')).json()
+
     for(let [index, event] of events.entries()){
         
         html+= `
@@ -32,8 +34,7 @@ export default async function showEvents(clubId){
                 <ul>    
                     <li>Cost: ${event.cost}</li> 
                     <li>Date: ${isValidDate(event.date) ? utcToDate(event.date) : ""}</li>
-                    <button onclick= "findEvent(${index});" id="test">Add to cart</button>
- 
+                    <button onclick= "findEvent(${index});" id="test">${loggedIn.loggedIn ? "Add to cart" : "You must be logged in to add to cart"}</button>
                 </ul>
             </u>
         </div>`
