@@ -40,19 +40,15 @@ export default function cart(){
 
     $('.increase-btn').click(function() {
         const eventId = $(this).data('event-id');
-        const cartContentsIndex = cartContents.findIndex(item => {
-            return item.event_id === eventId
-        })
-        const cartItem = cartContents[cartContentsIndex]
-        cartItem.amount++; // Increment the count
-        updateCartContents(); // Update the cartContents array
-        $(`.count-btn[data-event-id="${eventId}"]`).text(cartItem.amount); // Update the button text
-        updateTotalPrice(cartItem);
-        
+        increaseDecrease(eventId)
     });
 
     $('.decrease-btn').click(function() {
         const eventId = $(this).data('event-id');
+        increaseDecrease(eventId)
+    });
+
+    const increaseDecrease = (eventId) => {
         const cartContentsIndex = cartContents.findIndex(item => {
             return item.event_id === eventId
         })
@@ -61,9 +57,7 @@ export default function cart(){
         updateCartContents(); // Update the cartContents array
         $(`.count-btn[data-event-id="${eventId}"]`).text(cartItem.amount); // Update the button text
         updateTotalPrice(cartItem);
-    });
-
-    
+    }
     
     function updateTotalPrice(cartItem) {
         // console.log(eventId)
