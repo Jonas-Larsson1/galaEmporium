@@ -6,7 +6,7 @@ import updateNavbar from "./components/navbar.js"
 import register from "./pages/register.js";
 import event from "./pages/event.js";
 import { createEvent } from "./pages/event.js";
-import mypage from "./components/mypage.js";
+import mypage from "./pages/mypage.js";
 
 // cart();
 
