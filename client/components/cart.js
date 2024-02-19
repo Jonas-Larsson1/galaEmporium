@@ -51,14 +51,14 @@ let countdownInterval;
 
 
 export function addToCart(event) {
-  console.log(event)
+  // console.log(event)
 
   // här behövs: id från event i stället för dummy title
   // let alreadyInCart = findItemByTitle(bookClubTicket.title, cartContents);
   // let dataContainer = document.createElement("div")
 
   
-  let alreadyInCart = 0;
+  // let alreadyInCart = 0;
 
   // // if ticket/s for chosen club already in cart: update object amount only
   // if (alreadyInCart) {
@@ -71,17 +71,44 @@ export function addToCart(event) {
     //   title: bookClubTicket.title,
     //   amount: 1
     // });
-    cartContents.push({
-      title: event.name,
-      event_id: event._id,
-      amount: 1,
-      date: event.date,
-      price: event.cost
-    });
 
-    sessionStorage.setItem("cartContents", JSON.stringify(cartContents));
-   
-  }
+    let alreadyInCart = false 
+    const existingCartItems = JSON.parse(sessionStorage.getItem("cartContents")) || []
+    console.log(existingCartItems)
+    if (existingCartItems.length > 0) {
+      existingCartItems.forEach(item => {
+        if (item.event_id === event._id) {
+          item.amount++
+          alreadyInCart = true
+        }
+      })
+    }
+
+    if (!alreadyInCart) {
+      existingCartItems.push({
+        title: event.name,
+        event_id: event._id,
+        amount: 1,
+        date: event.date,
+        price: event.cost
+      });
+    }
+
+    console.log(alreadyInCart)
+    sessionStorage.setItem("cartContents", JSON.stringify(existingCartItems));
+      
+
+    // cartContents.push({
+    //   title: event.name,
+    //   event_id: event._id,
+    //   amount: 1,
+    //   date: event.date,
+    //   price: event.cost
+    // });
+
+    // sessionStorage.setItem("cartContents", JSON.stringify(cartContents));
+  }  
+  
 
   clearInterval(countdownInterval);
 
