@@ -42,6 +42,7 @@ export default function cart(){
                 <button class="decrease-btn" data-event-id="${item.event_id}">-</button>
             </div> 
             <div class="price" data-price-id="${item.event_id}">${item.price}</div>
+            <div class="price" data-singlePrice-id="${item.event_id}">${item.price}</div>
             </div>
             `;
         }
@@ -79,8 +80,12 @@ export default function cart(){
     });
     
     function updateTotalPrice(eventId) {
-        const price = parseFloat($(`.price[data-price-id="${eventId.coount}"]`)); // Fetch the price as a float
+        console.log(eventId)
+        // console.log(eventId.count)
+        const price = ($(`.price[data-singlePrice-id="${eventId}"]`).text())
         const count = eventIdCount[eventId].count;
+        console.log(count)
+        console.log(price)
         const totalPrice = (price * count).toFixed(2); // Ensure two decimal places
         $(`.price[data-price-id="${eventId}"]`).text(totalPrice);
         
