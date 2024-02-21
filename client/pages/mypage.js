@@ -1,4 +1,4 @@
-export default function mypage() {
+export default async function mypage() {
    let content = "";
    const userId = JSON.parse(sessionStorage.getItem('userId'))
   //  console.log(userId)
@@ -21,7 +21,7 @@ export default function mypage() {
 
               content += `
           <div class="container">
-            <img class='container_img' src=${booking.event_id.img}/>
+            <img class='container_img' src=${booking.event_id.img}>
             <p>${booking.event_id.name}</p>
             <p>${formattedDate} ${formattedTime}</p>
             <p>${booking.event_id.cost} SEK</p>
