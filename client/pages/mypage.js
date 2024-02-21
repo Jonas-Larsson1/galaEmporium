@@ -5,8 +5,8 @@ export default function mypage() {
    let html = `<div id='container-xl'></div>`
        $.get(`/api/booking/user/${userId.loggedIn}`, function (data) {
         if (userId) {
-          console.log("User ID:", userId);
-          console.log(data.length)
+          // console.log("User ID:", userId);
+          // console.log(data.length)
           if (data.length == 0) {
             content += "<h1>Inga evenemang är bokade</h1>"
           } else {
@@ -34,7 +34,7 @@ export default function mypage() {
       
       $('#container-xl').html(content);
        }    else {
-        console.log('User ID är inte tillgänglig');
+        // console.log('User ID är inte tillgänglig');
         ;
        }
       //  $('#container-xl').html(content);

@@ -1,10 +1,5 @@
 // import { cartSummary, submitBookingBtn } from "./html-elements.js"; 
 import { reservationTimeout, checkIfReservationExpired } from "./reservation-expiration.js";
-import { findItemByTitle, countdownSecondsToTwoDigits, countdownMinutesToTwoDigits } from "./process-data-utils.js";
-import { updateCart } from "./update-cart.js";
-
-
-
 
 // const countdownDiv = document.querySelector("#countdown");
 
@@ -26,12 +21,6 @@ let countdownInterval;
 //     let currentTime = new Date().getTime();
 //     let timeElapsed = currentTime - timeWhenLastItemWasAdded;
 //     let timeRemaining = Math.max(reservationTimeout - timeElapsed, 0);
-
-//     if (timeRemaining > 0) {
-//       countdownInterval = setInterval(updateCountdown, 1000);
-//     } else {
-//       countdownDiv.textContent = "";
-//     }
 //   }
 // });
 
@@ -46,9 +35,6 @@ let countdownInterval;
 //     submitBookingBtn.disabled = false;
 //   }
 // }
-
-
-
 
 export function addToCart(event) {
   // console.log(event)
@@ -75,6 +61,8 @@ export function addToCart(event) {
     let alreadyInCart = false 
     const existingCartItems = JSON.parse(sessionStorage.getItem("cartContents")) || []
     // console.log(existingCartItems)
+
+
     if (existingCartItems.length > 0) {
       existingCartItems.forEach(item => {
         if (item.event_id === event._id) {
@@ -139,53 +127,11 @@ export function emptyCart() {
   sessionStorage.removeItem("timeWhenLastItemWasAdded");
   // update session storage
   sessionStorage.setItem("cartContents", JSON.stringify(cartContents));
-  updateCart(cartContents);
-  toggleCartButtons();
+  // updateCart(cartContents);
+  // toggleCartButtons();
   // stop countdown timer
   clearInterval(countdownInterval);
   // countdownDiv.textContent = "";
 
   timeWhenLastItemWasAdded = null;
 }
-
-function updateCountdown() {
-  if (timeWhenLastItemWasAdded) {
-    let currentTime = new Date().getTime();
-    let timeElapsed = currentTime - timeWhenLastItemWasAdded;
-    let timeRemaining = Math.max(reservationTimeout - timeElapsed, 0);
-
-    let minutes = Math.floor(timeRemaining / (1000 * 60));
-    let seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-    seconds = countdownSecondsToTwoDigits(seconds);
-    minutes = countdownMinutesToTwoDigits(minutes);
-    // countdownDiv.textContent = `Your tickets are reserved for another ${minutes}:${seconds}`;
-
-    if (timeRemaining === 0) {
-      clearInterval(countdownInterval);
-      checkIfReservationExpired();
-    }
-  }
-}
-
-// check initial state of btn
-// toggleCartButtons();
-
-// emptyCartBtn.addEventListener("click", () => {
-//   emptyCart();
-// });
-
-// updateCart(cartContents);
-// //toggleCartButtons();
-
-// if (cartContents.length > 0) {
-//   countdownInterval = setInterval(updateCountdown, 1000);
-// }
-
-// // här behövs:
-// // POST till bookings 
-// // PUT till events (minska antalet tillgängliga platser på event)
-// submitBookingBtn.addEventListener("click", () => {
-//   //submitBooking();
-//   console.log("Klick!");
-//   emptyCart();
-// });

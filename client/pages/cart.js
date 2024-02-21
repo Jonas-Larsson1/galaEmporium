@@ -1,3 +1,4 @@
+import { emptyCart } from "../components/cart.js";
 let cartContents
 export default function cart(){
     cartContents = JSON.parse(sessionStorage.getItem('cartContents'));
@@ -97,6 +98,7 @@ const createBooking = async () => {
     }
 
     cartContents = []
+    emptyCart()
     updateCartContents()
     location.reload()
 }
