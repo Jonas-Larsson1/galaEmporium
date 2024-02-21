@@ -1,13 +1,12 @@
-
-
-export default function mypage() {
+export default async function mypage() {
    let content = "";
-   const userId = sessionStorage.getItem('userId');
+   const userId = JSON.parse(sessionStorage.getItem('userId'))
+  //  console.log(userId)
    let html = `<div id='container-xl'></div>`
-       $.get(`/api/booking/user/${userId}`, function (data) {
+       $.get(`/api/booking/user/${userId.loggedIn}`, function (data) {
         if (userId) {
-          console.log("User ID:", userId);
-          console.log(data.length)
+          // console.log("User ID:", userId);
+          // console.log(data.length)
           if (data.length == 0) {
             content += "<h1>Inga evenemang är bokade</h1>"
           } else {
@@ -22,7 +21,7 @@ export default function mypage() {
 
               content += `
           <div class="container">
-            <img class='container_img' src=${booking.event_id.img}/>
+            <img class='container_img' src=${booking.event_id.img}>
             <p>${booking.event_id.name}</p>
             <p>${formattedDate} ${formattedTime}</p>
             <p>${booking.event_id.cost} SEK</p>
@@ -35,7 +34,7 @@ export default function mypage() {
       
       $('#container-xl').html(content);
        }    else {
-        console.log('User ID är inte tillgänglig');
+        // console.log('User ID är inte tillgänglig');
         ;
        }
       //  $('#container-xl').html(content);

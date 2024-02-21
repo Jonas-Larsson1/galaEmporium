@@ -1,0 +1,13 @@
+.cart-container{
+    border: 2px solid pink; 
+    width: 80%;
+    margin: 30px;
+}
+
+.main-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    align-items: center;
+    padding: 10px;
+}

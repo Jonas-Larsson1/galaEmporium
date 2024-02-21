@@ -1,8 +1,9 @@
 import { utcToDate, isValidDate } from "../functions/utcToDate.js"
 import { isClubOwner } from "../functions/general.js"
+import { addToCart } from "../components/cart.js"
 
+let events = []
 export default async function showEvents(clubId){
-    let events
 
     if (!clubId) {
         const response = await fetch ("/api/event")
@@ -16,7 +17,9 @@ export default async function showEvents(clubId){
         return new Date(a.date) - new Date(b.date)
     })
 
-    for(let event of events){
+    const loggedIn = await (await fetch ('/api/login')).json()
+
+    for(let [index, event] of events.entries()){
         
         html+= `
         <div id="event-container">
@@ -30,7 +33,8 @@ export default async function showEvents(clubId){
             <u>
                 <ul>    
                     <li>Cost: ${event.cost}</li> 
-                    <li>Date: ${isValidDate(event.date) ? utcToDate(event.date) : ""}</li> 
+                    <li>Date: ${isValidDate(event.date) ? utcToDate(event.date) : ""}</li>
+                    <button onclick= "findEvent(${index});" id="test">${loggedIn.loggedIn ? "Add to cart" : "You must be logged in to add to cart"}</button>
                 </ul>
             </u>
         </div>`
@@ -40,4 +44,9 @@ export default async function showEvents(clubId){
 
 }
 
+function findEvent(index){
+    addToCart(events[index])
+}
+
+window.findEvent = findEvent
 

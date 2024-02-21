@@ -3,7 +3,8 @@ import mongoose from "mongoose"
 const bookingSchema = mongoose.Schema({
   event_id: {type: mongoose.Schema.Types.ObjectId, ref: "events"},
   user_id: {type: mongoose.Schema.Types.ObjectId, ref: "users"},
-  seats_reserved: Number, 
+  seats_reserved: Number,
+  total_price: Number, 
   paid: Boolean  
 })
 
@@ -33,10 +34,25 @@ export default function booking(server) {
   })
 
 
-  // server.get('/api/booking/:id', async (req,res)=> {
-  //   const event = await bookingModel.findById(req.params.id).populate("event_id")
-  //   res.json(event)
-  // })
+  server.post('/api/bookings', async (req, res) => {
+    try {
+      if(req.session.user) {
+        const newBooking = new bookingModel({
+          event_id: req.body.event_id,
+          user_id: req.session.user,
+          seats_reserved: req.body.amount,
+          total_price: req.body.totalPrice,
+          paid: false
+        })
+        const savedBooking = await newBooking.save();
+        res.status(201).json(savedBooking);
+      } else {
+        res.status(403).json({ message: "You need to be logged in!" });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "There was a problem adding the booking." });
+    }
+  })
 
   
 }

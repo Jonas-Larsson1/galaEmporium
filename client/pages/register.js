@@ -16,13 +16,13 @@ export default function register() {
 
   async function submitForm(event) {
     event.preventDefault();
-    console.log('submitted')
+    // console.log('submitted')
     const data = {
       name: $('#register [name="name"]').val(),
       email: $('#register [name="email"]').val(),
       password: $('#register [name="password"]').val()
     }
-    console.log(data)
+    // console.log(data)
     
   fetch('/api/user', {
     method: 'POST',
@@ -33,7 +33,7 @@ export default function register() {
   })
   .then(response => response.json())
   .then(data => {
-    console.log('Login response:', data);
+    // console.log('Login response:', data);
     $('#register [name="name"]').val(''),
     $('#register [name="email"]').val(''),
     $('#register [name="password"]').val('')

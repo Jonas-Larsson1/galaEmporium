@@ -5,7 +5,7 @@ export default async function home() {
   let htmlEvent = `` 
 
   htmlEvent += `
-  <a href="#events"><h1 class="clubCard"> All upcoming events... </h1></a>
+  <a href="#events"><h1> All upcoming events... </h1></a>
 
   
   `
