@@ -1,10 +1,9 @@
-
-
 export default function mypage() {
    let content = "";
-   const userId = sessionStorage.getItem('userId');
+   const userId = JSON.parse(sessionStorage.getItem('userId'))
+  //  console.log(userId)
    let html = `<div id='container-xl'></div>`
-       $.get(`/api/booking/user/${userId}`, function (data) {
+       $.get(`/api/booking/user/${userId.loggedIn}`, function (data) {
         if (userId) {
           console.log("User ID:", userId);
           console.log(data.length)

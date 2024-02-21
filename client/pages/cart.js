@@ -83,7 +83,7 @@ const createBooking = async () => {
 
     for (let cartItem of cartContents) {
         cartItem.user = user.loggedIn
-        console.log('cart item:', cartItem)
+        // console.log('cart item:', cartItem)
         const newBooking = await fetch(`/api/bookings`, {
             method: "post" ,
             headers: {
@@ -93,8 +93,12 @@ const createBooking = async () => {
         })
 
         const res = await newBooking.json()
-        console.log('response:', res)
+        // console.log('response:', res)
     }
+
+    cartContents = []
+    updateCartContents()
+    location.reload()
 }
 
 window.increaseDecrease = increaseDecrease
