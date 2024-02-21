@@ -27,6 +27,7 @@ export default function cart(){
     let html = `
     <div class="cart-container">
         ${cartItemsHtml}
+        <button onclick="createBooking()">Book tickets</button>
     </div>
     `
     // const cartDiv = document.createElement('div');
@@ -77,4 +78,24 @@ function updateCartContents() {
     sessionStorage.setItem('cartContents', JSON.stringify(cartContents)); // Update sessionStorage with the modified cartContents
 }
 
+const createBooking = async () => {
+    const user = await (await fetch ('/api/login')).json()
+
+    for (let cartItem of cartContents) {
+        cartItem.user = user.loggedIn
+        console.log('cart item:', cartItem)
+        const newBooking = await fetch(`/api/bookings`, {
+            method: "post" ,
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(cartItem)
+        })
+
+        const res = await newBooking.json()
+        console.log('response:', res)
+    }
+}
+
 window.increaseDecrease = increaseDecrease
+window.createBooking = createBooking
