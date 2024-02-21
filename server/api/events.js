@@ -44,7 +44,7 @@ export default function event(server) {
           cost:req.body.cost,
           max_attendees: req.body.max_attendees,
           club_id: req.body.club_id,
-          img: req.body.img, //Kommer inte att laddas upp som bild... 
+          img: req.body.img, 
         })
         const result = await newEvent.save()
         return res.status(200).json(result)

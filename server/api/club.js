@@ -44,8 +44,9 @@ export default function club(server) {
       }
 
       if (Object.keys(updatedData).length > 0) {
-        await clubModel.findByIdAndUpdate(req.params.id, updatedData, {new: false})
-        const newUpdatedClub = await clubModel.findById(req.params.id)
+        const newUpdatedClub = await clubModel.findByIdAndUpdate(req.params.id, updatedData, {new: false})
+        // console.log(newUpdatedClub)
+        // const newUpdatedClub = await clubModel.findById(req.params.id)
         if(!newUpdatedClub){
           return res.status(404).json({message: "Klubb hittades inte"})
         }
