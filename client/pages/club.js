@@ -1,14 +1,11 @@
-import { utcToDate, isValidDate } from "../functions/utcToDate.js"// import { utcToDate, isValidDate } from "../functions/utcToDate.js"
 import showEvents from "./event.js"
 import { isClubOwner } from "../functions/general.js"
 
-async function club(clubId) {
+export default async function club(clubId) {
   const response = await fetch(`/api/club/${clubId}`)
   const club = await response.json()
   const ownerResponse = await fetch(`/api/club/${clubId}/users`)
   const clubOwners = await ownerResponse.json()
-  const eventResponse = await fetch(`/api/clubEvents/${clubId}`)
-  const clubEvent = await eventResponse.json()
   const loggedInRes = await fetch('/api/login')
   const logInData = await loggedInRes.json()
 
@@ -53,26 +50,3 @@ async function club(clubId) {
     </main>
   `;
 }
-
-const funcs = {
-  "club" : club,
-}
-
-export default funcs;
-
-
-// const dialogElement = document.getElementById("edit-dialog");
-// dialogElement.style.display = "flex";
-
-// const cancelButtonElement = document.getElementById("cancel-button");
-// cancelButtonElement.addEventListener("click", () => {
-//   dialogElement.style.display = "none";
-// });
-
-// const confirmButtonElement = document.getElementById("confirm-button");
-// confirmButtonElement.addEventListener("click", () => {
-//   // Editing the club page
-//   console.log("Editing the club page...");
-
-//   dialogElement.style.display = "none";
-// });

@@ -3,23 +3,39 @@
     width: 20rem;
     height: fit-content;
     flex-direction: column;
+    margin-top: 2rem;
 }
 
-#edit-form input {
-    height: 3rem;
-}
-
-#edit-name {
-
+#edit-form input, textarea {
+    min-height: 3rem;
 }
 
 #edit-description {
-    height: 8rem;
+    resize: vertical;
+    max-height: 20rem;
 }
 
-#edit-image {
+#buttons-div {
+    display: flex;
 }
 
 #edit-submit {
+    width: 9rem;
+    font-size: 15px;
+    margin-left: auto;
+    cursor: pointer;
+}
 
+#cancel-button {
+    width: 8rem;
+    text-align: center;
+    text-decoration: none;
+    padding: 1rem 0.5rem;
+    background-color: rgb(255, 95, 95);
+    color: white;
+    border-radius: 3px;
+}
+
+#cancel-button:hover {
+    background-color: rgb(253, 76, 76);
 }

@@ -25,11 +25,12 @@ async function route() {
       break;
     case "editEventPage":
       $('main').html(await editEventPage(params[1]))
+      break;
     case "club":
-      $('main').html(await club.club(params[1]))
+      $('main').html(await club(params[1]))
       break;
     case "editClubPage":
-      $('main').html(await editClubPage(params[1], params[2]))
+      $('main').html(await editClubPage(params[1]))
       break;
     case "register":
       $('main').html(await register())

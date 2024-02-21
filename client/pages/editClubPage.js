@@ -1,9 +1,6 @@
 export default async function editClubPage(clubId){
     
-    let club = await (await fetch(`/api/club/${clubId}`)).json()
-    // let currentClubName = club.clubId.name     
-
-    console.log(club)
+    let club = await (await fetch(`/api/club/${clubId}`)).json()     
 
     const userId = await (await fetch ("/api/login")).json()
     if (userId.loggedIn) {
@@ -14,13 +11,16 @@ export default async function editClubPage(clubId){
         <input type="text" id="edit-name" name="name" value="${club.name}"><br>
         
         <label for="description">Change description</label><br>
-        <input type="text" id="edit-description" name="description" value="${club.description}"><br>
-        
+        <textarea type="text" id="edit-description" name="description">${club.description}</textarea><br>
         
         <label for="img">Change image</label><br>
         <input type="text" id="edit-image" name="image" value="${club.image}"><br>
-        
-        <input type="submit" id="edit-submit" value="Submit" onclick="updateClub('${clubId}'); return false;">
+
+        <div id="buttons-div">  
+            <a href="#club?${clubId}" id="cancel-button">Cancel</a>      
+            <input type="submit" id="edit-submit" value="Submit" onclick="updateClub('${clubId}'); return false;">
+        </div>
+
         </form>
         `  
         } else {
