@@ -1,3 +1,6 @@
+## User stories
+[User stories och lösningar.pdf](https://github.com/Jonas-Larsson1/galaEmporium/files/14359681/User.stories.och.losningar.pdf)
+
 ## Trello
 https://trello.com/invite/b/uny4SRON/ATTI9e6159150a675f4f32831f52dd9aee747EA9D807/databaser-grupp-3
 
