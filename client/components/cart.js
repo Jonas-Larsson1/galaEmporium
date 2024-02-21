@@ -97,19 +97,19 @@ export function addToCart(event) {
     // });
 
     // sessionStorage.setItem("cartContents", JSON.stringify(cartContents));
+    clearInterval(countdownInterval);
+    timeWhenLastItemWasAdded = new Date().getTime();
+    sessionStorage.setItem("timeWhenLastItemWasAdded", timeWhenLastItemWasAdded);
+    setTimeout(checkIfReservationExpired, reservationTimeout);
   }  
   
 
-  clearInterval(countdownInterval);
 
   // sets time for addition to cart
-  timeWhenLastItemWasAdded = new Date().getTime();
-  sessionStorage.setItem("timeWhenLastItemWasAdded", timeWhenLastItemWasAdded);
   // updateCart(cartContents);
   // toggleCartButtons();
 
   // set timeout from addition to cart
-  setTimeout(checkIfReservationExpired, reservationTimeout);
 
   // start the countdown timer if it is not already running
   // if (!countdownInterval) {
